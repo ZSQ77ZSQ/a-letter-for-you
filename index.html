@@ -5,21 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>给你的一封信</title>
+    <title>给你的一封信 🌊</title>
     <style>
         :root {
-            --bg-deep: #0a2a35;
-            --bg-card: rgba(18, 55, 70, 0.7);
-            --gold: #c9a87c;
-            --gold-light: #e0cba0;
+            --bg-card: rgba(255, 250, 245, 0.75);
+            --gold: #c38d5d;
+            --gold-light: #e7b98a;
             --rose: #d4857a;
-            --text-primary: #f0ebe0;
-            --text-secondary: #dcd5c8;
-            --text-muted: #b9b0a2;
+            --text-primary: #3e2e23;
+            --text-secondary: #5e4d3e;
+            --text-muted: #8b7a6b;
             --accent: #b8867e;
-            --accent-soft: #c49d95;
-            --border-glow: rgba(200, 160, 120, 0.35);
-            --shadow-card: 0 4px 30px rgba(0, 0, 0, 0.4);
+            --border-glow: rgba(200, 160, 120, 0.5);
+            --shadow-card: 0 8px 32px rgba(0, 0, 0, 0.15);
             --font-cn: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans SC", sans-serif;
             --font-serif: "Noto Serif SC", "STSong", "Songti SC", "SimSun", "KaiTi", "楷体", serif;
         }
@@ -38,7 +36,8 @@
 
         body {
             font-family: var(--font-cn);
-            background: var(--bg-deep);
+            background: #b5e1f0;
+            /* 基础天蓝色，canvas 覆盖 */
             color: var(--text-primary);
             line-height: 1.8;
             overflow-x: hidden;
@@ -47,9 +46,11 @@
             min-height: 100dvh;
             position: relative;
             letter-spacing: 0.02em;
+            margin: 0;
+            padding: 0;
         }
 
-        /* ============ 大海沙滩 Canvas 背景 ============ */
+        /* ============ 卡通海滩 Canvas ============ */
         #beachCanvas {
             position: fixed;
             top: 0;
@@ -59,89 +60,73 @@
             height: 100dvh;
             z-index: 0;
             pointer-events: none;
-            opacity: 0.9;
+            opacity: 1;
         }
 
         /* ============ 主内容容器 ============ */
         .main-container {
             position: relative;
-            z-index: 1;
+            z-index: 2;
             pointer-events: auto;
-            padding: 0 20px;
+            padding: 0 18px;
             max-width: 600px;
             margin: 0 auto;
             padding-bottom: 60px;
         }
 
-        /* ============ 第一部分：Hero 开场 ============ */
+        /* ============ Hero 开场 ============ */
         .hero-section {
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            min-height: 100vh;
-            min-height: 100dvh;
+            min-height: 85vh;
+            min-height: 85dvh;
             text-align: center;
-            padding: 40px 20px;
+            padding: 30px 16px 20px;
             position: relative;
         }
-
         .hero-sun {
-            width: 80px;
-            height: 80px;
+            width: 70px;
+            height: 70px;
             border-radius: 50%;
-            background: radial-gradient(circle at 40% 40%, #ffe7c4 0%, #fcd49b 25%, #f0a85a 55%, #c9733a 80%, #6e3a1c 100%);
-            box-shadow: 0 0 80px rgba(255, 200, 120, 0.6), 0 0 160px rgba(240, 160, 80, 0.35), 0 0 240px rgba(220, 140, 60, 0.15);
-            margin-bottom: 36px;
-            animation: sunPulse 5s ease-in-out infinite;
-            position: relative;
+            background: radial-gradient(circle at 40% 40%, #fff2c0, #ffcb6b, #f08a3e);
+            box-shadow: 0 0 70px rgba(255, 220, 120, 0.8);
+            margin-bottom: 28px;
+            animation: sunGlow 3s ease-in-out infinite;
         }
-        .hero-sun::after {
-            content: '';
-            position: absolute;
-            top: 15px;
-            left: 18px;
-            width: 18px;
-            height: 18px;
-            border-radius: 50%;
-            background: rgba(255, 250, 240, 0.6);
-            filter: blur(5px);
-        }
-        @keyframes sunPulse {
+        @keyframes sunGlow {
             0%,
             100% {
-                box-shadow: 0 0 80px rgba(255, 200, 120, 0.6), 0 0 160px rgba(240, 160, 80, 0.35), 0 0 240px rgba(220, 140, 60, 0.15);
+                box-shadow: 0 0 70px rgba(255, 220, 120, 0.8);
             }
             50% {
-                box-shadow: 0 0 100px rgba(255, 210, 130, 0.75), 0 0 190px rgba(245, 170, 90, 0.45), 0 0 280px rgba(230, 150, 70, 0.2);
+                box-shadow: 0 0 100px rgba(255, 240, 140, 0.95);
             }
         }
-
         .hero-title {
             font-family: var(--font-serif);
-            font-size: 2rem;
-            font-weight: 400;
-            color: var(--text-primary);
+            font-size: 2.1rem;
+            font-weight: 500;
+            color: #ffffff;
+            text-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
             letter-spacing: 0.08em;
-            margin-bottom: 12px;
-            opacity: 0;
-            animation: fadeInUp 1.2s ease forwards;
-            animation-delay: 0.3s;
+            margin-bottom: 10px;
+            animation: fadeInUp 1s ease forwards;
         }
         .hero-subtitle {
             font-size: 0.95rem;
-            color: var(--text-muted);
+            color: #fff9f0;
+            text-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
             letter-spacing: 0.05em;
-            font-weight: 300;
-            opacity: 0;
-            animation: fadeInUp 1.2s ease forwards;
-            animation-delay: 0.7s;
+            font-weight: 400;
+            animation: fadeInUp 1s ease 0.3s forwards;
             max-width: 280px;
         }
         @keyframes fadeInUp {
             from {
                 opacity: 0;
-                transform: translateY(28px);
+                transform: translateY(25px);
             }
             to {
                 opacity: 1;
@@ -149,240 +134,132 @@
             }
         }
 
-        .hero-scroll-hint {
-            position: absolute;
-            bottom: 50px;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 8px;
-            opacity: 0;
-            animation: fadeInUp 1.2s ease forwards;
-            animation-delay: 1.3s;
-        }
-        .hero-scroll-hint span {
-            font-size: 0.7rem;
-            letter-spacing: 0.1em;
-            color: var(--text-muted);
-        }
-        .scroll-arrow {
-            width: 24px;
-            height: 24px;
-            border-right: 1.5px solid var(--text-muted);
-            border-bottom: 1.5px solid var(--text-muted);
-            transform: rotate(45deg);
-            animation: scrollBounce 2s ease-in-out infinite;
-        }
-        @keyframes scrollBounce {
-            0%,
-            100% {
-                transform: rotate(45deg) translateY(0);
-            }
-            50% {
-                transform: rotate(45deg) translateY(8px);
-            }
-        }
-
-        /* ============ 通用板块样式 ============ */
+        /* ============ 通用板块 ============ */
         .section {
-            margin-bottom: 50px;
+            margin-bottom: 45px;
             opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.9s ease, transform 0.9s ease;
+            transform: translateY(25px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
         }
         .section.visible {
             opacity: 1;
             transform: translateY(0);
         }
-
         .section-label {
             font-size: 0.7rem;
-            letter-spacing: 0.18em;
-            color: var(--gold);
+            letter-spacing: 0.2em;
+            color: #d08c5a;
             text-transform: uppercase;
-            margin-bottom: 16px;
-            font-weight: 400;
-            opacity: 0.8;
+            margin-bottom: 10px;
+            font-weight: 600;
+            background: rgba(255, 255, 255, 0.6);
+            display: inline-block;
+            padding: 2px 14px;
+            border-radius: 20px;
+            backdrop-filter: blur(4px);
         }
-
         .section-title {
             font-family: var(--font-serif);
-            font-size: 1.45rem;
-            font-weight: 400;
-            color: var(--text-primary);
-            letter-spacing: 0.05em;
-            margin-bottom: 20px;
-            line-height: 1.5;
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: #3e2e23;
+            margin-bottom: 18px;
+            line-height: 1.4;
         }
 
         /* ============ 反思卡片 ============ */
         .reflection-cards {
             display: flex;
             flex-direction: column;
-            gap: 16px;
+            gap: 14px;
         }
         .reflection-card {
             background: var(--bg-card);
-            border: 1px solid var(--border-glow);
-            border-radius: 16px;
-            padding: 22px 20px;
-            position: relative;
-            overflow: hidden;
+            border: 1px solid rgba(200, 160, 120, 0.4);
+            border-radius: 18px;
+            padding: 18px 18px;
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
-            transition: all 0.4s ease;
             box-shadow: var(--shadow-card);
-        }
-        .reflection-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 3px;
-            height: 100%;
-            background: linear-gradient(180deg, var(--gold), var(--rose), transparent);
-            border-radius: 3px 0 0 3px;
-            opacity: 0.7;
+            transition: transform 0.3s;
         }
         .reflection-card .card-icon {
-            font-size: 1.3rem;
-            margin-bottom: 10px;
-            display: block;
+            font-size: 1.5rem;
+            margin-bottom: 6px;
         }
         .reflection-card .card-title {
             font-size: 0.9rem;
-            font-weight: 500;
-            color: var(--gold-light);
-            letter-spacing: 0.04em;
+            font-weight: 600;
+            color: #b5744a;
             margin-bottom: 6px;
         }
         .reflection-card .card-text {
             font-size: 0.85rem;
-            color: var(--text-secondary);
+            color: #5e4d3e;
             line-height: 1.7;
-            letter-spacing: 0.03em;
         }
-        .reflection-card .card-highlight {
+        .card-highlight {
             display: inline-block;
             margin-top: 8px;
             font-size: 0.8rem;
-            color: var(--accent-soft);
-            font-weight: 500;
-            letter-spacing: 0.04em;
+            color: #c2846a;
+            font-weight: 600;
             padding: 4px 12px;
-            border: 1px solid rgba(180, 130, 120, 0.3);
+            border: 1px solid rgba(180, 130, 120, 0.5);
             border-radius: 20px;
-            background: rgba(180, 130, 120, 0.08);
+            background: rgba(255, 240, 230, 0.7);
         }
 
-        /* ============ 信封&信件区域 ============ */
-        .letter-wrapper {
-            perspective: 1200px;
-            margin: 10px 0 30px;
-        }
-        .envelope-outer {
-            background: var(--bg-card);
-            border: 1px solid var(--border-glow);
-            border-radius: 18px;
-            overflow: hidden;
-            box-shadow: var(--shadow-card);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            cursor: pointer;
-            transition: all 0.5s ease;
+        /* ============ 信件直接展示区域（无点击） ============ */
+        .letter-card {
+            background: #fffbf5;
+            border: 2px solid #e7c8a0;
+            border-radius: 20px;
+            padding: 28px 22px;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2), 0 0 0 8px rgba(255, 240, 220, 0.5);
             position: relative;
-            -webkit-tap-highlight-color: transparent;
-            user-select: none;
+            backdrop-filter: blur(8px);
+            margin-top: 10px;
         }
-        .envelope-outer:active {
-            transform: scale(0.97);
-            transition: transform 0.15s ease;
-        }
-        .envelope-seal {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 28px 20px 18px;
-            position: relative;
-            transition: all 0.5s ease;
-        }
-        .seal-wax {
-            width: 44px;
-            height: 44px;
-            border-radius: 50%;
-            background: radial-gradient(circle at 40% 35%, #e07b6b 0%, #b54a3a 40%, #7a2a1e 70%, #4a180e 100%);
-            box-shadow: 0 4px 20px rgba(180, 70, 40, 0.5), inset 0 2px 4px rgba(255, 200, 180, 0.3);
-            position: relative;
-            transition: all 0.6s ease;
-            z-index: 2;
-        }
-        .seal-wax::after {
-            content: '♡';
+        .letter-card::before {
+            content: "💌";
             position: absolute;
-            top: 50%;
+            top: -18px;
             left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 1rem;
-            color: rgba(255, 220, 200, 0.8);
-            text-shadow: 0 0 6px rgba(255, 180, 150, 0.6);
+            transform: translateX(-50%);
+            font-size: 2rem;
+            background: #fffbf5;
+            padding: 0 12px;
+            border-radius: 30px;
         }
-        .envelope-flap-hint {
+        .letter-title {
+            font-family: var(--font-serif);
+            font-size: 1.6rem;
             text-align: center;
-            font-size: 0.75rem;
-            color: var(--text-muted);
+            color: #5a3e2b;
+            margin-bottom: 20px;
+            font-weight: 600;
             letter-spacing: 0.06em;
-            padding-bottom: 16px;
-            transition: opacity 0.5s ease;
-        }
-        .envelope-letter-content {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.7s cubic-bezier(0.25, 0.8, 0.25, 1.2), padding 0.7s ease, opacity 0.5s ease;
-            opacity: 0;
-            padding: 0 22px;
-            background: rgba(25, 45, 55, 0.5);
-            margin: 0 12px;
-            border-radius: 10px;
-        }
-        .envelope-outer.opened .envelope-letter-content {
-            max-height: 4000px;
-            opacity: 1;
-            padding: 20px 22px 24px;
-        }
-        .envelope-outer.opened .seal-wax {
-            transform: scale(0.3);
-            opacity: 0;
-            box-shadow: 0 0 0px transparent;
-        }
-        .envelope-outer.opened .envelope-flap-hint {
-            opacity: 0;
-        }
-        .envelope-outer.opened .envelope-seal {
-            padding-bottom: 4px;
-        }
-        .envelope-outer.opened {
-            border-color: rgba(200, 160, 120, 0.5);
-            box-shadow: 0 4px 40px rgba(180, 130, 80, 0.3), 0 0 0 1px rgba(200, 150, 100, 0.2);
         }
         .letter-body {
             font-family: var(--font-serif);
             font-size: 0.9rem;
-            color: #f2e8db;
-            line-height: 2;
-            letter-spacing: 0.04em;
+            color: #4a3728;
+            line-height: 2.1;
             white-space: pre-wrap;
             word-break: break-word;
             text-align: justify;
+            background: repeating-linear-gradient(#fffbf5, #fffbf5 29px, #e9d8c0 30px);
+            padding: 10px 6px;
         }
         .letter-signature {
             text-align: right;
-            margin-top: 20px;
+            margin-top: 18px;
             font-family: var(--font-serif);
-            font-size: 0.9rem;
-            color: var(--gold-light);
-            letter-spacing: 0.06em;
+            font-size: 0.95rem;
+            color: #c38d5d;
+            font-weight: 600;
+            letter-spacing: 0.05em;
         }
 
         /* ============ 承诺区域 ============ */
@@ -395,46 +272,44 @@
             display: flex;
             align-items: flex-start;
             gap: 12px;
-            background: var(--bg-card);
+            background: rgba(255, 250, 245, 0.75);
             border-radius: 14px;
             padding: 16px 18px;
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            transition: all 0.3s ease;
+            border: 1px solid rgba(200, 160, 120, 0.3);
+            backdrop-filter: blur(8px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
         }
         .promise-dot {
-            flex-shrink: 0;
             width: 8px;
             height: 8px;
             border-radius: 50%;
-            background: var(--gold);
+            background: #d4857a;
             margin-top: 7px;
-            box-shadow: 0 0 10px rgba(200, 160, 120, 0.6);
+            box-shadow: 0 0 10px rgba(210, 130, 120, 0.5);
         }
         .promise-text {
             font-size: 0.85rem;
-            color: var(--text-secondary);
-            letter-spacing: 0.03em;
+            color: #5e4d3e;
             line-height: 1.7;
         }
         .promise-text strong {
-            color: var(--gold-light);
-            font-weight: 500;
+            color: #b5744a;
         }
 
-        /* ============ 结尾区域 ============ */
+        /* ============ 结尾 ============ */
         .ending-section {
             text-align: center;
             padding: 30px 10px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 40px;
+            backdrop-filter: blur(8px);
         }
         .ending-heart {
-            font-size: 2.5rem;
+            font-size: 2.8rem;
             display: block;
-            margin-bottom: 16px;
+            margin-bottom: 12px;
             animation: heartBeat 1.6s ease-in-out infinite;
-            color: var(--rose);
-            text-shadow: 0 0 30px rgba(210, 130, 120, 0.6);
+            color: #d4857a;
         }
         @keyframes heartBeat {
             0%,
@@ -442,13 +317,13 @@
                 transform: scale(1);
             }
             15% {
-                transform: scale(1.18);
+                transform: scale(1.15);
             }
             30% {
                 transform: scale(1);
             }
             45% {
-                transform: scale(1.12);
+                transform: scale(1.1);
             }
             60% {
                 transform: scale(1);
@@ -457,77 +332,43 @@
         .ending-text {
             font-family: var(--font-serif);
             font-size: 1.1rem;
-            color: var(--text-primary);
+            color: #3e2e23;
             letter-spacing: 0.05em;
             line-height: 1.8;
-            margin-bottom: 8px;
         }
         .ending-subtext {
             font-size: 0.8rem;
-            color: var(--text-muted);
+            color: #8b7a6b;
             letter-spacing: 0.04em;
+            margin-top: 8px;
         }
 
-        /* 响应式微调 */
         @media screen and (max-width: 380px) {
             .hero-title {
-                font-size: 1.7rem;
+                font-size: 1.8rem;
             }
             .section-title {
                 font-size: 1.3rem;
             }
             .letter-body {
-                font-size: 0.82rem;
-                line-height: 1.9;
-            }
-            .reflection-card {
-                padding: 16px 14px;
-            }
-            .reflection-card .card-text {
                 font-size: 0.8rem;
-            }
-            .promise-text {
-                font-size: 0.8rem;
-            }
-            .envelope-letter-content {
-                padding: 0 14px;
-            }
-            .envelope-outer.opened .envelope-letter-content {
-                padding: 16px 14px 20px;
-            }
-        }
-        @media screen and (min-width: 420px) {
-            .hero-title {
-                font-size: 2.3rem;
-            }
-            .section-title {
-                font-size: 1.55rem;
-            }
-            .letter-body {
-                font-size: 0.95rem;
+                line-height: 2;
             }
         }
     </style>
 </head>
 <body>
-
-    <!-- 大海沙滩画布 -->
     <canvas id="beachCanvas" aria-hidden="true"></canvas>
 
     <div class="main-container">
-
-        <!-- Hero 开场 -->
+        <!-- Hero -->
         <section class="hero-section">
             <div class="hero-sun"></div>
             <h1 class="hero-title">给你的一封信</h1>
-            <p class="hero-subtitle">有些话，我早该认真说给你听。<br>请你给我几分钟，好吗？</p>
-            <div class="hero-scroll-hint">
-                <span>向下滑动</span>
-                <div class="scroll-arrow"></div>
-            </div>
+            <p class="hero-subtitle">有些话，我想认真说给你听。<br>下面这封信，是我全部的真心。</p>
         </section>
 
-        <!-- 反思区域 -->
+        <!-- 反思卡片 -->
         <section class="section" data-animate>
             <div class="section-label">✦ 我听到了</div>
             <h2 class="section-title">那些你曾说过的话，<br>我现在真的听懂了</h2>
@@ -535,44 +376,31 @@
                 <div class="reflection-card">
                     <span class="card-icon">🕯️</span>
                     <div class="card-title">关于「承担责任」</div>
-                    <div class="card-text">
-                        你说觉得我没有承担责任的能力。我回想了很多事，才明白你说的不是某一件事，而是很多个瞬间的累积——是我在需要站出来的时候退缩了，在需要我做决定的时候把问题推给了你，在你最需要依靠的时候让你觉得只有自己一个人。
-                    </div>
+                    <div class="card-text">你说觉得我没有承担责任的能力。我回想了很多事，才明白那是很多个瞬间的累积——我在需要站出来的时候退缩了，让你一个人面对。</div>
                     <span class="card-highlight">我明白了：责任不是口号，是每一天的行动。</span>
                 </div>
                 <div class="reflection-card">
                     <span class="card-icon">🌙</span>
                     <div class="card-title">关于「听不懂你说话」</div>
-                    <div class="card-text">
-                        我以前总以为自己在听，但其实我听到的是字面，却没有听懂你的情绪、你的需求、你藏在话里的期待。你反复说同一件事不是因为啰嗦，而是因为我从来没有真正回应到你心里去。让你一遍遍重复，是我的错。
-                    </div>
-                    <span class="card-highlight">我明白了：听，是要听到心里去，而不只是耳朵。</span>
+                    <div class="card-text">我以前总以为自己在听，但听到的只是字面，没有懂你的情绪和期待。让你一遍遍重复，是我的错。</div>
+                    <span class="card-highlight">我明白了：听，是要听到心里去。</span>
                 </div>
                 <div class="reflection-card">
                     <span class="card-icon">🪷</span>
                     <div class="card-title">关于「变成陌生人」</div>
-                    <div class="card-text">
-                        你曾说觉得我越来越陌生。这句话让我心碎，也让我惊醒。是我在日复一日的懈怠中，忘记了你最初认识的那个我是什么样子。我弄丢了那个认真、用心、把你放在心尖上的人。但现在我找到他了，我想让你重新认识他。
-                    </div>
-                    <span class="card-highlight">我明白了：爱需要持续的用心，而不是得到了就松懈。</span>
+                    <div class="card-text">你曾说觉得我越来越陌生。我弄丢了那个用心把你放在心尖上的人。但现在我找到他了，我想让你重新认识他。</div>
+                    <span class="card-highlight">我明白了：爱需要持续的用心。</span>
                 </div>
             </div>
         </section>
 
-        <!-- 信件区域 -->
+        <!-- 信件直接展示（无点击） -->
         <section class="section" data-animate>
             <div class="section-label">✉️ 写给你的信</div>
             <h2 class="section-title">一封我用心写下的信</h2>
-            <div class="letter-wrapper">
-                <div class="envelope-outer" id="envelope" role="button" aria-label="点击打开信封">
-                    <div class="envelope-seal">
-                        <div class="seal-wax"></div>
-                    </div>
-                    <div class="envelope-flap-hint">轻点封蜡 · 打开信封</div>
-                    <div class="envelope-letter-content" id="letterContent">
-                        <div class="letter-body">《给你的一封信》
-
-你最近还好吗？分开以后，我像被抽空了。每天都反反复复想我们的事，饭到嘴里咽不下去，觉也睡不了，做任何事情都提不起兴趣，有时想到胸口发闷，像喘不上气一样。
+            <div class="letter-card">
+                <div class="letter-title">《给你的一封信》</div>
+                <div class="letter-body">你最近还好吗？分开以后，我像被抽空了。每天都反反复复想我们的事，饭到嘴里咽不下去，觉也睡不了，做任何事情都提不起兴趣，有时想到胸口发闷，像喘不上气一样。
 
 我每天都会像放电影一样，一遍遍过我们以前的事。学生那会儿，我俩把校园每个角落都走遍了，还记得南区校门外那家锅盔吗，你总说你一个人吃不完，我们就一人一半分着吃。咱俩都是夜猫子，大半夜不睡觉，一起当美国人，熬到早上你说想吃糊汤粉，我俩照样精神得很，打个车就去。后来一起去健身，我教你动作，看着你推的重量一天天往上加，心里其实特高兴，练完我们就直奔串串店，那会儿的日子真好啊。要说吃饭，你是我最好的饭搭子和调味剂，还记得家旁边的萍姐火锅吗，我们每次都会点满满一桌子的肉，能比别人四个人吃得还多，吃完我会摸一下你圆滚滚的肚子问你吃饱了吗。我们还一起去了好多城市，成都看大熊猫，长沙橘子洲，石河子老街，广州塔，还有潮汕。潮汕那次是我俩第一次一起看海，海浪一下一下打在脚上，没过膝盖，我们在沙滩上写对方的名字，拍了好多好多照片。每次和你一起去一个新的地方，我心里都特别特别开心，那种开心，现在再也没有过了。
 
@@ -588,37 +416,35 @@
 关于以后，我还是想跟你说说，仅是一份真心的打算。今年我会沉下心来，把工作做好，把该学的东西学好，把自己调整到一个对的状态。集控大楼明年建成后，我的工作节奏会稳定很多，不用再像以前那样总是身不由己。
 
 如果你还愿意给我一个机会，我想把你接过来。我想和你认认真真地在一起，不用再隔着手机屏幕吵架了。到时候，我们可以养一只猫和一只狗，猫就懒洋洋地窝着，狗就调皮一点。休息的时候，一起牵着它们出门走走，回家后猫就趴在你腿上。那是我觉得这辈子最踏实、最好的日子了。</div>
-                        <div class="letter-signature">张世奇<br>2026.6.4</div>
-                    </div>
-                </div>
+                <div class="letter-signature">张世奇<br>2026.6.4</div>
             </div>
         </section>
 
-        <!-- 承诺区域 -->
+        <!-- 承诺 -->
         <section class="section" data-animate>
             <div class="section-label">🤍 我的承诺</div>
             <h2 class="section-title">不是空洞的保证，<br>是我想做到的改变</h2>
             <div class="promise-list">
                 <div class="promise-item">
                     <div class="promise-dot"></div>
-                    <div class="promise-text"><strong>学会倾听：</strong>当你说话时，我会放下手机，看着你的眼睛，用心去理解你说的话和话里的情绪。如果我听不懂，我会认真问你，而不是敷衍过去。</div>
+                    <div class="promise-text"><strong>学会倾听：</strong>当你说话时，我会放下手机，用心去理解你的话和情绪。如果不懂，我会认真问你。</div>
                 </div>
                 <div class="promise-item">
                     <div class="promise-dot"></div>
-                    <div class="promise-text"><strong>承担责任：</strong>遇到问题我不再逃避，不再把难题都推给你。我会站出来，做那个你可以依靠的人，用行动而不是空话来证明。</div>
+                    <div class="promise-text"><strong>承担责任：</strong>遇到问题我不再逃避，我会站出来，做你可以依靠的人。</div>
                 </div>
                 <div class="promise-item">
                     <div class="promise-dot"></div>
-                    <div class="promise-text"><strong>保持沟通：</strong>我会主动和你分享我的想法和感受，不再让你猜，也不再让你一个人扛着所有的情绪。好的关系需要坦诚，我会做到。</div>
+                    <div class="promise-text"><strong>保持沟通：</strong>主动分享我的想法，不再让你一个人扛着所有情绪。</div>
                 </div>
                 <div class="promise-item">
                     <div class="promise-dot"></div>
-                    <div class="promise-text"><strong>珍惜每一天：</strong>不再把一切当成理所当然。每一个和你有关的瞬间，我都会用心对待。让你感受到被在乎、被重视、被坚定地选择。</div>
+                    <div class="promise-text"><strong>珍惜每一天：</strong>不再把一切当成理所当然，让你感受到被在乎、被坚定选择。</div>
                 </div>
             </div>
         </section>
 
-        <!-- 结尾区域 -->
+        <!-- 结尾 -->
         <section class="section ending-section" data-animate>
             <span class="ending-heart">♡</span>
             <p class="ending-text">
@@ -636,258 +462,334 @@
 
     <script>
         (function() {
-            // ============ 大海沙滩 Canvas ============
             const canvas = document.getElementById('beachCanvas');
             const ctx = canvas.getContext('2d');
-            let width, height;
+            let w, h;
             let waveOffset = 0;
+            let clouds = [];
             let seagulls = [];
-            let shells = [];
             let animationId;
 
             function resize() {
-                width = canvas.width = window.innerWidth;
-                height = canvas.height = window.innerHeight;
+                w = canvas.width = window.innerWidth;
+                h = canvas.height = window.innerHeight;
+                initClouds();
                 initSeagulls();
-                initShells();
+            }
+
+            function initClouds() {
+                clouds = [];
+                for (let i = 0; i < 5; i++) {
+                    clouds.push({
+                        x: Math.random() * w,
+                        y: 30 + Math.random() * 100,
+                        speed: 0.2 + Math.random() * 0.5,
+                        scale: 0.8 + Math.random() * 1.2,
+                    });
+                }
             }
 
             function initSeagulls() {
                 seagulls = [];
-                const count = Math.floor(width / 180);
-                for (let i = 0; i < count; i++) {
+                for (let i = 0; i < 4; i++) {
                     seagulls.push({
-                        x: Math.random() * width,
-                        y: 30 + Math.random() * (height * 0.25),
-                        size: 4 + Math.random() * 6,
-                        speed: 0.3 + Math.random() * 0.7,
-                        amplitude: 0.4 + Math.random() * 0.8,
-                        offset: Math.random() * Math.PI * 2,
+                        x: Math.random() * w,
+                        y: 60 + Math.random() * 90,
+                        wing: Math.random() * Math.PI * 2,
                     });
                 }
             }
 
-            function initShells() {
-                shells = [];
-                const count = Math.floor(width / 60);
-                for (let i = 0; i < count; i++) {
-                    shells.push({
-                        x: Math.random() * width,
-                        y: height - 8 - Math.random() * 30,
-                        size: 2 + Math.random() * 5,
-                        type: Math.random() < 0.5 ? 'round' : 'spiral',
-                        rotation: Math.random() * Math.PI * 2,
-                    });
-                }
+            function drawSky() {
+                const grad = ctx.createLinearGradient(0, 0, 0, h * 0.7);
+                grad.addColorStop(0, '#c6e9fa');
+                grad.addColorStop(0.5, '#f9eac3');
+                grad.addColorStop(1, '#fad6a5');
+                ctx.fillStyle = grad;
+                ctx.fillRect(0, 0, w, h * 0.7);
             }
 
-            function drawSky(time) {
-                const gradient = ctx.createLinearGradient(0, 0, 0, height * 0.65);
-                gradient.addColorStop(0, '#fad6a5');
-                gradient.addColorStop(0.3, '#f8c18a');
-                gradient.addColorStop(0.7, '#e4a67c');
-                gradient.addColorStop(1, '#c58b6b');
-                ctx.fillStyle = gradient;
-                ctx.fillRect(0, 0, width, height * 0.65);
-            }
-
-            function drawSun() {
-                const sunX = width * 0.82;
-                const sunY = height * 0.28;
-                const gradient = ctx.createRadialGradient(sunX, sunY, 0, sunX, sunY, 70);
-                gradient.addColorStop(0, 'rgba(255,240,200,1)');
-                gradient.addColorStop(0.2, 'rgba(255,220,160,0.9)');
-                gradient.addColorStop(0.5, 'rgba(255,180,100,0.5)');
-                gradient.addColorStop(1, 'rgba(255,140,60,0)');
-                ctx.fillStyle = gradient;
-                ctx.beginPath();
-                ctx.arc(sunX, sunY, 70, 0, Math.PI * 2);
-                ctx.fill();
-
-                ctx.fillStyle = 'rgba(255,245,220,0.7)';
-                ctx.beginPath();
-                ctx.arc(sunX, sunY, 38, 0, Math.PI * 2);
-                ctx.fill();
-            }
-
-            function drawOcean(time) {
-                const horizonY = height * 0.6;
-                const oceanGrad = ctx.createLinearGradient(0, horizonY, 0, height);
-                oceanGrad.addColorStop(0, '#3a6b7c');
-                oceanGrad.addColorStop(0.3, '#255265');
-                oceanGrad.addColorStop(0.7, '#143b47');
-                oceanGrad.addColorStop(1, '#0a2a35');
-                ctx.fillStyle = oceanGrad;
-                ctx.fillRect(0, horizonY, width, height - horizonY);
-
-                // 波浪
-                ctx.save();
-                ctx.beginPath();
-                ctx.moveTo(0, horizonY);
-                for (let x = 0; x <= width; x += 5) {
-                    const y = horizonY + Math.sin(x * 0.02 + waveOffset) * 7 + Math.sin(x * 0.05 + time * 0.02) * 3;
-                    ctx.lineTo(x, y);
-                }
-                ctx.lineTo(width, horizonY - 30);
-                ctx.lineTo(0, horizonY - 30);
-                ctx.closePath();
-                const waveGrad = ctx.createLinearGradient(0, horizonY - 15, 0, horizonY + 15);
-                waveGrad.addColorStop(0, 'rgba(240,210,170,0.5)');
-                waveGrad.addColorStop(0.5, 'rgba(180,200,210,0.3)');
-                waveGrad.addColorStop(1, 'rgba(40,100,120,0.1)');
-                ctx.fillStyle = waveGrad;
-                ctx.fill();
-                ctx.restore();
-
-                // 海面反光
-                for (let i = 0; i < 30; i++) {
-                    const fx = (i * 97 + time * 2) % width;
-                    const fy = horizonY + 20 + Math.sin(i * 1.7 + time * 0.05) * 10;
-                    ctx.fillStyle = 'rgba(255,240,210,0.15)';
-                    ctx.beginPath();
-                    ctx.arc(fx, fy, 2 + Math.sin(time * 0.1 + i) * 1.5, 0, Math.PI * 2);
-                    ctx.fill();
-                }
-            }
-
-            function drawBeach() {
-                const beachStartY = height * 0.78;
-                const beachGrad = ctx.createLinearGradient(0, beachStartY, 0, height);
-                beachGrad.addColorStop(0, '#dbb88c');
-                beachGrad.addColorStop(0.3, '#c9a278');
-                beachGrad.addColorStop(0.7, '#b58b63');
-                beachGrad.addColorStop(1, '#9e7350');
-                ctx.fillStyle = beachGrad;
-                ctx.fillRect(0, beachStartY, width, height - beachStartY);
-
-                // 沙滩纹理
-                ctx.fillStyle = 'rgba(255,235,210,0.15)';
-                for (let i = 0; i < width; i += 12) {
-                    const y = beachStartY + 5 + Math.sin(i * 0.3) * 4;
-                    ctx.beginPath();
-                    ctx.arc(i, y, 1.5, 0, Math.PI * 2);
-                    ctx.fill();
-                }
-            }
-
-            function drawSeagulls(time) {
-                for (const gull of seagulls) {
-                    gull.x += gull.speed * 0.3;
-                    if (gull.x > width + 20) gull.x = -20;
-                    const y = gull.y + Math.sin(time * 0.03 + gull.offset) * gull.amplitude * 8;
-                    ctx.strokeStyle = 'rgba(255,255,255,0.7)';
-                    ctx.lineWidth = 1;
-                    ctx.beginPath();
-                    ctx.moveTo(gull.x - gull.size, y);
-                    ctx.quadraticCurveTo(gull.x - gull.size * 0.6, y - gull.size * 0.6, gull.x, y);
-                    ctx.quadraticCurveTo(gull.x + gull.size * 0.6, y - gull.size * 0.6, gull.x + gull.size, y);
-                    ctx.stroke();
-                }
-            }
-
-            function drawShells() {
-                for (const shell of shells) {
+            function drawClouds(time) {
+                for (let c of clouds) {
+                    c.x += c.speed * 0.4;
+                    if (c.x > w + 120) c.x = -120;
                     ctx.save();
-                    ctx.translate(shell.x, shell.y);
-                    ctx.rotate(shell.rotation);
-                    ctx.fillStyle = 'rgba(245,235,215,0.7)';
+                    ctx.translate(c.x, c.y);
+                    ctx.scale(c.scale, c.scale);
+                    ctx.fillStyle = 'rgba(255,255,255,0.9)';
                     ctx.beginPath();
-                    if (shell.type === 'round') {
-                        ctx.arc(0, 0, shell.size, 0, Math.PI * 2);
-                    } else {
-                        ctx.ellipse(0, 0, shell.size * 0.8, shell.size * 1.2, 0, 0, Math.PI * 2);
-                    }
-                    ctx.fill();
-                    ctx.fillStyle = 'rgba(210,180,140,0.5)';
-                    ctx.beginPath();
-                    ctx.arc(0, 0, shell.size * 0.5, 0, Math.PI * 2);
+                    ctx.arc(0, 0, 30, 0, Math.PI * 2);
+                    ctx.arc(30, -5, 25, 0, Math.PI * 2);
+                    ctx.arc(50, 5, 28, 0, Math.PI * 2);
+                    ctx.arc(-25, 8, 22, 0, Math.PI * 2);
                     ctx.fill();
                     ctx.restore();
                 }
             }
 
+            function drawSun() {
+                const sx = w * 0.8,
+                    sy = h * 0.2;
+                ctx.fillStyle = '#fffbe6';
+                ctx.beginPath();
+                ctx.arc(sx, sy, 38, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.fillStyle = '#ffdf80';
+                ctx.beginPath();
+                ctx.arc(sx, sy, 30, 0, Math.PI * 2);
+                ctx.fill();
+                // 笑脸
+                ctx.fillStyle = '#5e3a1c';
+                ctx.beginPath();
+                ctx.arc(sx - 8, sy - 5, 3, 0, Math.PI, false);
+                ctx.fill();
+                ctx.beginPath();
+                ctx.arc(sx + 8, sy - 5, 3, 0, Math.PI, false);
+                ctx.fill();
+                ctx.beginPath();
+                ctx.arc(sx, sy + 2, 12, 0.1, Math.PI - 0.1);
+                ctx.stroke();
+            }
+
+            function drawOcean(time) {
+                const horizon = h * 0.68;
+                const grad = ctx.createLinearGradient(0, horizon, 0, h);
+                grad.addColorStop(0, '#56b4d9');
+                grad.addColorStop(0.5, '#3a8db5');
+                grad.addColorStop(1, '#1c5b7a');
+                ctx.fillStyle = grad;
+                ctx.fillRect(0, horizon, w, h - horizon);
+
+                // 波浪
+                ctx.save();
+                ctx.beginPath();
+                ctx.moveTo(0, horizon);
+                for (let x = 0; x <= w; x += 8) {
+                    let y = horizon + Math.sin(x * 0.025 + waveOffset) * 7 + Math.cos(x * 0.04 + time * 0.02) * 3;
+                    ctx.lineTo(x, y);
+                }
+                ctx.lineTo(w, horizon - 20);
+                ctx.lineTo(0, horizon - 20);
+                ctx.closePath();
+                ctx.fillStyle = 'rgba(240, 248, 255, 0.4)';
+                ctx.fill();
+                ctx.restore();
+            }
+
+            function drawBeach() {
+                const beachY = h * 0.82;
+                const grad = ctx.createLinearGradient(0, beachY, 0, h);
+                grad.addColorStop(0, '#f5deb3');
+                grad.addColorStop(0.4, '#e6c78a');
+                grad.addColorStop(1, '#c9a56a');
+                ctx.fillStyle = grad;
+                ctx.fillRect(0, beachY, w, h - beachY);
+
+                // 小点纹理
+                ctx.fillStyle = 'rgba(255,255,240,0.4)';
+                for (let i = 0; i < 30; i++) {
+                    let bx = (i * 73 + 17) % w;
+                    let by = beachY + 8 + (i % 15) * 4;
+                    ctx.beginPath();
+                    ctx.arc(bx, by, 1.5, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+            }
+
+            function drawShellsAndStarfish() {
+                // 贝壳
+                ctx.fillStyle = '#f7e3d4';
+                ctx.beginPath();
+                ctx.ellipse(40, h - 28, 12, 7, 0, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.fillStyle = '#e0b89a';
+                ctx.beginPath();
+                ctx.arc(40, h - 30, 4, 0, Math.PI * 2);
+                ctx.fill();
+
+                // 海星
+                ctx.fillStyle = '#f4acac';
+                ctx.save();
+                ctx.translate(100, h - 22);
+                ctx.rotate(0.2);
+                drawStar(ctx, 0, 0, 5, 9, 4);
+                ctx.fill();
+                ctx.restore();
+
+                // 小螃蟹
+                ctx.fillStyle = '#e6734a';
+                ctx.beginPath();
+                ctx.ellipse(180, h - 16, 8, 5, 0, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.beginPath();
+                ctx.arc(172, h - 20, 3, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.beginPath();
+                ctx.arc(188, h - 20, 3, 0, Math.PI * 2);
+                ctx.fill();
+            }
+
+            function drawStar(ctx, cx, cy, spikes, outerR, innerR) {
+                let rot = Math.PI / 2 * 3;
+                let step = Math.PI / spikes;
+                ctx.beginPath();
+                for (let i = 0; i < spikes; i++) {
+                    let x = cx + Math.cos(rot) * outerR;
+                    let y = cy + Math.sin(rot) * outerR;
+                    ctx.lineTo(x, y);
+                    rot += step;
+                    x = cx + Math.cos(rot) * innerR;
+                    y = cy + Math.sin(rot) * innerR;
+                    ctx.lineTo(x, y);
+                    rot += step;
+                }
+                ctx.closePath();
+            }
+
+            // 绘制史迪仔（可爱卡通版）
+            function drawStitch(x, y, scale) {
+                ctx.save();
+                ctx.translate(x, y);
+                ctx.scale(scale, scale);
+
+                // 身体
+                ctx.fillStyle = '#5b9bd5';
+                ctx.beginPath();
+                ctx.ellipse(0, 0, 22, 28, 0, 0, Math.PI * 2);
+                ctx.fill();
+
+                // 肚子
+                ctx.fillStyle = '#b0d4f1';
+                ctx.beginPath();
+                ctx.ellipse(0, 6, 14, 16, 0, 0, Math.PI * 2);
+                ctx.fill();
+
+                // 耳朵
+                ctx.fillStyle = '#5b9bd5';
+                ctx.beginPath();
+                ctx.ellipse(-16, -22, 10, 14, -0.3, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.beginPath();
+                ctx.ellipse(16, -22, 10, 14, 0.3, 0, Math.PI * 2);
+                ctx.fill();
+                // 耳朵缺口
+                ctx.fillStyle = '#3b7ab5';
+                ctx.beginPath();
+                ctx.ellipse(-16, -18, 6, 6, 0, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.beginPath();
+                ctx.ellipse(16, -18, 6, 6, 0, 0, Math.PI * 2);
+                ctx.fill();
+
+                // 眼睛
+                ctx.fillStyle = 'white';
+                ctx.beginPath();
+                ctx.ellipse(-7, -8, 7, 10, 0, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.beginPath();
+                ctx.ellipse(7, -8, 7, 10, 0, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.fillStyle = '#1d1d2b';
+                ctx.beginPath();
+                ctx.arc(-7, -9, 3.5, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.beginPath();
+                ctx.arc(7, -9, 3.5, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.fillStyle = 'white';
+                ctx.beginPath();
+                ctx.arc(-5, -11, 1.2, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.beginPath();
+                ctx.arc(9, -11, 1.2, 0, Math.PI * 2);
+                ctx.fill();
+
+                // 鼻子
+                ctx.fillStyle = '#f2a3b6';
+                ctx.beginPath();
+                ctx.ellipse(0, 2, 5, 4, 0, 0, Math.PI * 2);
+                ctx.fill();
+
+                // 嘴
+                ctx.strokeStyle = '#3e2e23';
+                ctx.lineWidth = 1.5;
+                ctx.beginPath();
+                ctx.arc(0, 6, 6, 0.1, Math.PI - 0.1);
+                ctx.stroke();
+
+                // 触角
+                ctx.fillStyle = '#5b9bd5';
+                ctx.beginPath();
+                ctx.ellipse(-14, -28, 3, 5, -0.2, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.beginPath();
+                ctx.ellipse(14, -28, 3, 5, 0.2, 0, Math.PI * 2);
+                ctx.fill();
+
+                ctx.restore();
+            }
+
+            function drawSeagullsCartoon(time) {
+                for (let g of seagulls) {
+                    let y = g.y + Math.sin(time * 0.02 + g.wing) * 5;
+                    ctx.strokeStyle = '#fff';
+                    ctx.lineWidth = 2;
+                    ctx.beginPath();
+                    ctx.moveTo(g.x - 8, y);
+                    ctx.quadraticCurveTo(g.x - 4, y - 6, g.x, y);
+                    ctx.quadraticCurveTo(g.x + 4, y - 6, g.x + 8, y);
+                    ctx.stroke();
+                }
+            }
+
             function animate(time) {
-                waveOffset += 0.015;
-                ctx.clearRect(0, 0, width, height);
-                drawSky(time);
+                waveOffset += 0.02;
+                ctx.clearRect(0, 0, w, h);
+                drawSky();
+                drawClouds(time);
                 drawSun();
                 drawOcean(time);
                 drawBeach();
-                drawSeagulls(time);
-                drawShells();
+                drawShellsAndStarfish();
+                drawSeagullsCartoon(time);
+
+                // 史迪仔站在沙滩右侧
+                const stitchX = w - 70;
+                const stitchY = h - 55;
+                drawStitch(stitchX, stitchY, 1.0);
+
+                // 再加一个小沙桶
+                ctx.fillStyle = '#e09e6e';
+                ctx.fillRect(30, h - 45, 18, 22);
+                ctx.fillStyle = '#c57e4a';
+                ctx.beginPath();
+                ctx.ellipse(39, h - 45, 9, 4, 0, 0, Math.PI * 2);
+                ctx.fill();
+
                 animationId = requestAnimationFrame(animate);
             }
 
-            window.addEventListener('resize', () => {
-                resize();
-            });
-
-            window.addEventListener('orientationchange', () => {
-                setTimeout(resize, 400);
-            });
-
+            window.addEventListener('resize', resize);
+            window.addEventListener('orientationchange', () => setTimeout(resize, 300));
             document.addEventListener('visibilitychange', () => {
-                if (document.hidden) {
-                    cancelAnimationFrame(animationId);
-                } else {
-                    animationId = requestAnimationFrame(animate);
-                }
+                if (document.hidden) cancelAnimationFrame(animationId);
+                else animationId = requestAnimationFrame(animate);
             });
 
             resize();
             animationId = requestAnimationFrame(animate);
 
-            // ============ 滚动触发动画 ============
-            const animatedSections = document.querySelectorAll('.section[data-animate]');
+            // 滚动动画
+            const sections = document.querySelectorAll('.section[data-animate]');
             const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
-                        observer.unobserve(entry.target);
+                entries.forEach(e => {
+                    if (e.isIntersecting) {
+                        e.target.classList.add('visible');
+                        observer.unobserve(e.target);
                     }
                 });
-            }, { rootMargin: '0px 0px -40px 0px', threshold: 0.15 });
-
-            animatedSections.forEach(section => observer.observe(section));
-
-            // ============ 信封打开 ============
-            const envelope = document.getElementById('envelope');
-            let isOpened = false;
-
-            function openEnvelope(e) {
-                if (isOpened) return;
-                e.preventDefault();
-                isOpened = true;
-                envelope.classList.add('opened');
-                setTimeout(() => {
-                    const letterContent = document.getElementById('letterContent');
-                    const rect = letterContent.getBoundingClientRect();
-                    const scrollY = window.pageYOffset || document.documentElement.scrollTop;
-                    window.scrollTo({
-                        top: scrollY + rect.top - 70,
-                        behavior: 'smooth',
-                    });
-                }, 400);
-            }
-
-            envelope.addEventListener('click', openEnvelope);
-            envelope.addEventListener('touchend', (e) => {
-                if (!isOpened) openEnvelope(e);
-            });
-
-            // 滚动提示自动隐藏
-            const hint = document.querySelector('.hero-scroll-hint');
-            if (hint) {
-                let hintHidden = false;
-                window.addEventListener('scroll', function hide() {
-                    if (!hintHidden && window.scrollY > 30) {
-                        hintHidden = true;
-                        hint.style.transition = 'opacity 0.6s ease';
-                        hint.style.opacity = '0';
-                        window.removeEventListener('scroll', hide);
-                    }
-                }, { passive: true });
-            }
+            }, { rootMargin: '0px 0px -30px 0px', threshold: 0.1 });
+            sections.forEach(s => observer.observe(s));
         })();
     </script>
 </body>
