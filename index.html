@@ -37,7 +37,6 @@
         body {
             font-family: var(--font-cn);
             background: #b5e1f0;
-            /* 基础天蓝色，canvas 覆盖 */
             color: var(--text-primary);
             line-height: 1.8;
             overflow-x: hidden;
@@ -50,7 +49,6 @@
             padding: 0;
         }
 
-        /* ============ 卡通海滩 Canvas ============ */
         #beachCanvas {
             position: fixed;
             top: 0;
@@ -63,7 +61,6 @@
             opacity: 1;
         }
 
-        /* ============ 主内容容器 ============ */
         .main-container {
             position: relative;
             z-index: 2;
@@ -74,7 +71,6 @@
             padding-bottom: 60px;
         }
 
-        /* ============ Hero 开场 ============ */
         .hero-section {
             display: flex;
             flex-direction: column;
@@ -134,7 +130,6 @@
             }
         }
 
-        /* ============ 通用板块 ============ */
         .section {
             margin-bottom: 45px;
             opacity: 0;
@@ -167,7 +162,6 @@
             line-height: 1.4;
         }
 
-        /* ============ 反思卡片 ============ */
         .reflection-cards {
             display: flex;
             flex-direction: column;
@@ -210,7 +204,6 @@
             background: rgba(255, 240, 230, 0.7);
         }
 
-        /* ============ 信件直接展示区域（无点击） ============ */
         .letter-card {
             background: #fffbf5;
             border: 2px solid #e7c8a0;
@@ -262,7 +255,6 @@
             letter-spacing: 0.05em;
         }
 
-        /* ============ 承诺区域 ============ */
         .promise-list {
             display: flex;
             flex-direction: column;
@@ -296,7 +288,6 @@
             color: #b5744a;
         }
 
-        /* ============ 结尾 ============ */
         .ending-section {
             text-align: center;
             padding: 30px 10px;
@@ -304,37 +295,13 @@
             border-radius: 40px;
             backdrop-filter: blur(8px);
         }
-        .ending-heart {
-            font-size: 2.8rem;
-            display: block;
-            margin-bottom: 12px;
-            animation: heartBeat 1.6s ease-in-out infinite;
-            color: #d4857a;
-        }
-        @keyframes heartBeat {
-            0%,
-            100% {
-                transform: scale(1);
-            }
-            15% {
-                transform: scale(1.15);
-            }
-            30% {
-                transform: scale(1);
-            }
-            45% {
-                transform: scale(1.1);
-            }
-            60% {
-                transform: scale(1);
-            }
-        }
         .ending-text {
             font-family: var(--font-serif);
             font-size: 1.1rem;
             color: #3e2e23;
             letter-spacing: 0.05em;
             line-height: 1.8;
+            margin-bottom: 8px;
         }
         .ending-subtext {
             font-size: 0.8rem;
@@ -394,7 +361,7 @@
             </div>
         </section>
 
-        <!-- 信件直接展示（无点击） -->
+        <!-- 信件直接展示 -->
         <section class="section" data-animate>
             <div class="section-label">✉️ 写给你的信</div>
             <h2 class="section-title">一封我用心写下的信</h2>
@@ -415,7 +382,7 @@
 
 关于以后，我还是想跟你说说，仅是一份真心的打算。今年我会沉下心来，把工作做好，把该学的东西学好，把自己调整到一个对的状态。集控大楼明年建成后，我的工作节奏会稳定很多，不用再像以前那样总是身不由己。
 
-如果你还愿意给我一个机会，我想把你接过来。我想和你认认真真地在一起，不用再隔着手机屏幕吵架了。到时候，我们可以养一只猫和一只狗，猫就懒洋洋地窝着，狗就调皮一点。休息的时候，一起牵着它们出门走走，回家后猫就趴在你腿上。那是我觉得这辈子最踏实、最好的日子了。</div>
+如果你还愿意给我一个机会，我想把你接过来。我想和你认认真真地在一起，不用再隔着手机屏幕吵架了。</div>
                 <div class="letter-signature">张世奇<br>2026.6.4</div>
             </div>
         </section>
@@ -444,19 +411,15 @@
             </div>
         </section>
 
-        <!-- 结尾 -->
+        <!-- 结尾区域：取自信件最后一段的温馨画面 -->
         <section class="section ending-section" data-animate>
-            <span class="ending-heart">♡</span>
-            <p class="ending-text">
-                我不奢求一封信就能让你回头。<br>
-                但我想让你知道——<br>
-                这一次，我是真的用心了。
-            </p>
-            <p class="ending-subtext">
-                如果你愿意，我就在这里。<br>
-                不急，不催，不等你说原谅。<br>
-                只想用行动，让你重新认识我。
-            </p>
+            <div class="ending-text">
+                <span style="font-size:1.8rem; display:block; margin-bottom:8px;">🐱🐶</span>
+                到时候，我们可以养一只猫和一只狗，<br>猫就懒洋洋地窝着，狗就调皮一点。<br>休息的时候，一起牵着它们出门走走，<br>回家后猫就趴在你腿上。<br>那是我觉得这辈子最踏实、最好的日子了。
+            </div>
+            <div class="ending-subtext" style="margin-top:16px;">
+                ♡ 不急，不催，不等你说原谅。<br>只想用行动，让你重新认识我。
+            </div>
         </section>
     </div>
 
@@ -538,7 +501,6 @@
                 ctx.beginPath();
                 ctx.arc(sx, sy, 30, 0, Math.PI * 2);
                 ctx.fill();
-                // 笑脸
                 ctx.fillStyle = '#5e3a1c';
                 ctx.beginPath();
                 ctx.arc(sx - 8, sy - 5, 3, 0, Math.PI, false);
@@ -560,7 +522,6 @@
                 ctx.fillStyle = grad;
                 ctx.fillRect(0, horizon, w, h - horizon);
 
-                // 波浪
                 ctx.save();
                 ctx.beginPath();
                 ctx.moveTo(0, horizon);
@@ -585,7 +546,6 @@
                 ctx.fillStyle = grad;
                 ctx.fillRect(0, beachY, w, h - beachY);
 
-                // 小点纹理
                 ctx.fillStyle = 'rgba(255,255,240,0.4)';
                 for (let i = 0; i < 30; i++) {
                     let bx = (i * 73 + 17) % w;
@@ -597,7 +557,6 @@
             }
 
             function drawShellsAndStarfish() {
-                // 贝壳
                 ctx.fillStyle = '#f7e3d4';
                 ctx.beginPath();
                 ctx.ellipse(40, h - 28, 12, 7, 0, 0, Math.PI * 2);
@@ -607,7 +566,6 @@
                 ctx.arc(40, h - 30, 4, 0, Math.PI * 2);
                 ctx.fill();
 
-                // 海星
                 ctx.fillStyle = '#f4acac';
                 ctx.save();
                 ctx.translate(100, h - 22);
@@ -616,7 +574,6 @@
                 ctx.fill();
                 ctx.restore();
 
-                // 小螃蟹
                 ctx.fillStyle = '#e6734a';
                 ctx.beginPath();
                 ctx.ellipse(180, h - 16, 8, 5, 0, 0, Math.PI * 2);
@@ -646,86 +603,126 @@
                 ctx.closePath();
             }
 
-            // 绘制史迪仔（可爱卡通版）
-            function drawStitch(x, y, scale) {
+            // 画小猫
+            function drawCat(x, y) {
                 ctx.save();
                 ctx.translate(x, y);
-                ctx.scale(scale, scale);
-
                 // 身体
-                ctx.fillStyle = '#5b9bd5';
+                ctx.fillStyle = '#f7b05e';
                 ctx.beginPath();
-                ctx.ellipse(0, 0, 22, 28, 0, 0, Math.PI * 2);
+                ctx.ellipse(0, 0, 12, 14, 0, 0, Math.PI * 2);
                 ctx.fill();
-
-                // 肚子
-                ctx.fillStyle = '#b0d4f1';
+                // 头
+                ctx.fillStyle = '#f7b05e';
                 ctx.beginPath();
-                ctx.ellipse(0, 6, 14, 16, 0, 0, Math.PI * 2);
+                ctx.arc(0, -16, 10, 0, Math.PI * 2);
                 ctx.fill();
-
                 // 耳朵
-                ctx.fillStyle = '#5b9bd5';
+                ctx.fillStyle = '#f7b05e';
                 ctx.beginPath();
-                ctx.ellipse(-16, -22, 10, 14, -0.3, 0, Math.PI * 2);
+                ctx.moveTo(-8, -22);
+                ctx.lineTo(-4, -30);
+                ctx.lineTo(0, -22);
                 ctx.fill();
                 ctx.beginPath();
-                ctx.ellipse(16, -22, 10, 14, 0.3, 0, Math.PI * 2);
+                ctx.moveTo(8, -22);
+                ctx.lineTo(4, -30);
+                ctx.lineTo(0, -22);
                 ctx.fill();
-                // 耳朵缺口
-                ctx.fillStyle = '#3b7ab5';
-                ctx.beginPath();
-                ctx.ellipse(-16, -18, 6, 6, 0, 0, Math.PI * 2);
-                ctx.fill();
-                ctx.beginPath();
-                ctx.ellipse(16, -18, 6, 6, 0, 0, Math.PI * 2);
-                ctx.fill();
-
                 // 眼睛
-                ctx.fillStyle = 'white';
+                ctx.fillStyle = '#3e2e23';
                 ctx.beginPath();
-                ctx.ellipse(-7, -8, 7, 10, 0, 0, Math.PI * 2);
+                ctx.arc(-4, -18, 2, 0, Math.PI * 2);
                 ctx.fill();
                 ctx.beginPath();
-                ctx.ellipse(7, -8, 7, 10, 0, 0, Math.PI * 2);
+                ctx.arc(4, -18, 2, 0, Math.PI * 2);
                 ctx.fill();
-                ctx.fillStyle = '#1d1d2b';
+                // 尾巴
+                ctx.strokeStyle = '#f7b05e';
+                ctx.lineWidth = 3;
                 ctx.beginPath();
-                ctx.arc(-7, -9, 3.5, 0, Math.PI * 2);
-                ctx.fill();
-                ctx.beginPath();
-                ctx.arc(7, -9, 3.5, 0, Math.PI * 2);
-                ctx.fill();
-                ctx.fillStyle = 'white';
-                ctx.beginPath();
-                ctx.arc(-5, -11, 1.2, 0, Math.PI * 2);
-                ctx.fill();
-                ctx.beginPath();
-                ctx.arc(9, -11, 1.2, 0, Math.PI * 2);
-                ctx.fill();
-
-                // 鼻子
-                ctx.fillStyle = '#f2a3b6';
-                ctx.beginPath();
-                ctx.ellipse(0, 2, 5, 4, 0, 0, Math.PI * 2);
-                ctx.fill();
-
-                // 嘴
-                ctx.strokeStyle = '#3e2e23';
-                ctx.lineWidth = 1.5;
-                ctx.beginPath();
-                ctx.arc(0, 6, 6, 0.1, Math.PI - 0.1);
+                ctx.moveTo(6, 10);
+                ctx.quadraticCurveTo(18, 8, 14, -4);
                 ctx.stroke();
+                ctx.restore();
+            }
 
-                // 触角
-                ctx.fillStyle = '#5b9bd5';
+            // 画小狗
+            function drawDog(x, y) {
+                ctx.save();
+                ctx.translate(x, y);
+                // 身体
+                ctx.fillStyle = '#d4a373';
                 ctx.beginPath();
-                ctx.ellipse(-14, -28, 3, 5, -0.2, 0, Math.PI * 2);
+                ctx.ellipse(0, 0, 14, 16, 0, 0, Math.PI * 2);
+                ctx.fill();
+                // 头
+                ctx.fillStyle = '#d4a373';
+                ctx.beginPath();
+                ctx.arc(0, -18, 12, 0, Math.PI * 2);
+                ctx.fill();
+                // 耳朵
+                ctx.fillStyle = '#b3804d';
+                ctx.beginPath();
+                ctx.ellipse(-10, -22, 5, 9, -0.3, 0, Math.PI * 2);
                 ctx.fill();
                 ctx.beginPath();
-                ctx.ellipse(14, -28, 3, 5, 0.2, 0, Math.PI * 2);
+                ctx.ellipse(10, -22, 5, 9, 0.3, 0, Math.PI * 2);
                 ctx.fill();
+                // 眼睛
+                ctx.fillStyle = '#3e2e23';
+                ctx.beginPath();
+                ctx.arc(-4, -20, 2, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.beginPath();
+                ctx.arc(4, -20, 2, 0, Math.PI * 2);
+                ctx.fill();
+                // 鼻子
+                ctx.fillStyle = '#3e2e23';
+                ctx.beginPath();
+                ctx.arc(0, -15, 3, 0, Math.PI * 2);
+                ctx.fill();
+                // 尾巴
+                ctx.strokeStyle = '#d4a373';
+                ctx.lineWidth = 3;
+                ctx.beginPath();
+                ctx.moveTo(8, 12);
+                ctx.quadraticCurveTo(20, 16, 16, 2);
+                ctx.stroke();
+                ctx.restore();
+            }
 
+            // 画两个恋人（简笔相依）
+            function drawCouple(x, y) {
+                ctx.save();
+                ctx.translate(x, y);
+                // 左边的人（稍高）
+                ctx.fillStyle = '#e0a899';
+                ctx.beginPath();
+                ctx.arc(-9, -24, 7, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.fillStyle = '#4a6fa5';
+                ctx.fillRect(-14, -17, 10, 16);
+                // 右边的人（稍矮，靠在一起）
+                ctx.fillStyle = '#e0a899';
+                ctx.beginPath();
+                ctx.arc(9, -22, 6, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.fillStyle = '#c47a6b';
+                ctx.fillRect(5, -16, 8, 14);
+                // 牵手
+                ctx.strokeStyle = '#e0a899';
+                ctx.lineWidth = 2;
+                ctx.beginPath();
+                ctx.moveTo(-5, -10);
+                ctx.lineTo(5, -9);
+                ctx.stroke();
+                // 爱心
+                ctx.fillStyle = '#e06666';
+                ctx.beginPath();
+                ctx.arc(-5, -30, 3, 0, Math.PI);
+                ctx.arc(5, -30, 3, 0, Math.PI);
+                ctx.fill();
                 ctx.restore();
             }
 
@@ -753,12 +750,13 @@
                 drawShellsAndStarfish();
                 drawSeagullsCartoon(time);
 
-                // 史迪仔站在沙滩右侧
-                const stitchX = w - 70;
-                const stitchY = h - 55;
-                drawStitch(stitchX, stitchY, 1.0);
+                // 小猫小狗和恋人放在沙滩右侧
+                const baseY = h - 32;
+                drawCat(w - 180, baseY);
+                drawDog(w - 140, baseY);
+                drawCouple(w - 90, baseY - 2);
 
-                // 再加一个小沙桶
+                // 小沙桶
                 ctx.fillStyle = '#e09e6e';
                 ctx.fillRect(30, h - 45, 18, 22);
                 ctx.fillStyle = '#c57e4a';
@@ -779,7 +777,6 @@
             resize();
             animationId = requestAnimationFrame(animate);
 
-            // 滚动动画
             const sections = document.querySelectorAll('.section[data-animate]');
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(e => {
