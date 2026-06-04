@@ -1,0 +1,1005 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta property="og:title" content="给你的一封信">
+    <meta property="og:description" content="用心写给你的话，请你看看">
+    <meta property="og:type" content="website">
+    <title>给你的一封信</title>
+    <style>
+        :root {
+            --bg-deep: #07071a;
+            --bg-card: rgba(20, 16, 40, 0.75);
+            --gold: #c9a87c;
+            --gold-light: #e0cba0;
+            --rose: #d4857a;
+            --text-primary: #e8e0d8;
+            --text-secondary: #c4bdb4;
+            --text-muted: #9a938a;
+            --accent: #b8867e;
+            --accent-soft: #c49d95;
+            --border-glow: rgba(200, 160, 120, 0.25);
+            --shadow-card: 0 4px 30px rgba(0, 0, 0, 0.5);
+            --font-cn: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans SC", sans-serif;
+            --font-serif: "Noto Serif SC", "STSong", "Songti SC", "SimSun", "KaiTi", "楷体", serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            -webkit-tap-highlight-color: transparent;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        body {
+            font-family: var(--font-cn);
+            background: var(--bg-deep);
+            color: var(--text-primary);
+            line-height: 1.8;
+            overflow-x: hidden;
+            -webkit-overflow-scrolling: touch;
+            min-height: 100vh;
+            min-height: 100dvh;
+            position: relative;
+            letter-spacing: 0.02em;
+        }
+
+        /* ============ 星空 Canvas 背景 ============ */
+        #starCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            height: 100dvh;
+            z-index: 0;
+            pointer-events: none;
+            opacity: 0.9;
+        }
+
+        /* ============ 主内容容器 ============ */
+        .main-container {
+            position: relative;
+            z-index: 1;
+            pointer-events: auto;
+            padding: 0 20px;
+            max-width: 600px;
+            margin: 0 auto;
+            padding-bottom: 60px;
+        }
+
+        /* ============ 第一部分：Hero 开场 ============ */
+        .hero-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            min-height: 100dvh;
+            text-align: center;
+            padding: 40px 20px;
+            position: relative;
+        }
+
+        .hero-moon {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 35% 35%, #f5e6d3 0%, #e8d5bc 20%, #c9a87c 50%, #8b6f4e 80%, #3d2e1f 100%);
+            box-shadow: 0 0 60px rgba(220, 180, 140, 0.5), 0 0 120px rgba(200, 150, 100, 0.3), 0 0 200px rgba(180, 130, 80, 0.15);
+            margin-bottom: 40px;
+            animation: moonPulse 4s ease-in-out infinite;
+            position: relative;
+        }
+        .hero-moon::after {
+            content: '';
+            position: absolute;
+            top: 12px;
+            left: 16px;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: rgba(255, 240, 220, 0.5);
+            filter: blur(3px);
+        }
+        @keyframes moonPulse {
+            0%,
+            100% {
+                box-shadow: 0 0 60px rgba(220, 180, 140, 0.5), 0 0 120px rgba(200, 150, 100, 0.3), 0 0 200px rgba(180, 130, 80, 0.15);
+            }
+            50% {
+                box-shadow: 0 0 80px rgba(230, 190, 150, 0.65), 0 0 150px rgba(210, 160, 110, 0.4), 0 0 240px rgba(190, 140, 90, 0.2);
+            }
+        }
+
+        .hero-title {
+            font-family: var(--font-serif);
+            font-size: 2rem;
+            font-weight: 400;
+            color: var(--text-primary);
+            letter-spacing: 0.08em;
+            margin-bottom: 12px;
+            opacity: 0;
+            animation: fadeInUp 1.2s ease forwards;
+            animation-delay: 0.3s;
+        }
+        .hero-subtitle {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            letter-spacing: 0.05em;
+            font-weight: 300;
+            opacity: 0;
+            animation: fadeInUp 1.2s ease forwards;
+            animation-delay: 0.7s;
+            max-width: 280px;
+        }
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(28px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-scroll-hint {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            opacity: 0;
+            animation: fadeInUp 1.2s ease forwards;
+            animation-delay: 1.3s;
+        }
+        .hero-scroll-hint span {
+            font-size: 0.7rem;
+            letter-spacing: 0.1em;
+            color: var(--text-muted);
+        }
+        .scroll-arrow {
+            width: 24px;
+            height: 24px;
+            border-right: 1.5px solid var(--text-muted);
+            border-bottom: 1.5px solid var(--text-muted);
+            transform: rotate(45deg);
+            animation: scrollBounce 2s ease-in-out infinite;
+        }
+        @keyframes scrollBounce {
+            0%,
+            100% {
+                transform: rotate(45deg) translateY(0);
+            }
+            50% {
+                transform: rotate(45deg) translateY(8px);
+            }
+        }
+
+        /* ============ 通用板块样式 ============ */
+        .section {
+            margin-bottom: 50px;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.9s ease, transform 0.9s ease;
+        }
+        .section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-label {
+            font-size: 0.7rem;
+            letter-spacing: 0.18em;
+            color: var(--gold);
+            text-transform: uppercase;
+            margin-bottom: 16px;
+            font-weight: 400;
+            opacity: 0.8;
+        }
+
+        .section-title {
+            font-family: var(--font-serif);
+            font-size: 1.45rem;
+            font-weight: 400;
+            color: var(--text-primary);
+            letter-spacing: 0.05em;
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+
+        /* ============ 反思卡片 ============ */
+        .reflection-cards {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        .reflection-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-glow);
+            border-radius: 16px;
+            padding: 22px 20px;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            transition: all 0.4s ease;
+            box-shadow: var(--shadow-card);
+        }
+        .reflection-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 3px;
+            height: 100%;
+            background: linear-gradient(180deg, var(--gold), var(--rose), transparent);
+            border-radius: 3px 0 0 3px;
+            opacity: 0.7;
+        }
+        .reflection-card .card-icon {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            display: block;
+        }
+        .reflection-card .card-title {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--gold-light);
+            letter-spacing: 0.04em;
+            margin-bottom: 6px;
+        }
+        .reflection-card .card-text {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            letter-spacing: 0.03em;
+        }
+        .reflection-card .card-highlight {
+            display: inline-block;
+            margin-top: 8px;
+            font-size: 0.8rem;
+            color: var(--accent-soft);
+            font-weight: 500;
+            letter-spacing: 0.04em;
+            padding: 4px 12px;
+            border: 1px solid rgba(180, 130, 120, 0.3);
+            border-radius: 20px;
+            background: rgba(180, 130, 120, 0.08);
+        }
+
+        /* ============ 信封&信件区域 ============ */
+        .letter-wrapper {
+            perspective: 1200px;
+            margin: 10px 0 30px;
+        }
+        .envelope-outer {
+            background: var(--bg-card);
+            border: 1px solid var(--border-glow);
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: var(--shadow-card);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            cursor: pointer;
+            transition: all 0.5s ease;
+            position: relative;
+            -webkit-tap-highlight-color: transparent;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+        .envelope-outer:active {
+            transform: scale(0.97);
+            transition: transform 0.15s ease;
+        }
+        .envelope-seal {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 28px 20px 18px;
+            position: relative;
+            transition: all 0.5s ease;
+        }
+        .seal-wax {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 40% 35%, #c94a4a 0%, #8b2020 50%, #5a1010 80%, #3d0808 100%);
+            box-shadow: 0 4px 20px rgba(180, 40, 40, 0.5), inset 0 2px 4px rgba(255, 180, 180, 0.3);
+            position: relative;
+            transition: all 0.6s ease;
+            z-index: 2;
+        }
+        .seal-wax::after {
+            content: '♡';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 1rem;
+            color: rgba(255, 220, 200, 0.8);
+            text-shadow: 0 0 6px rgba(255, 180, 150, 0.6);
+        }
+        .envelope-flap-hint {
+            text-align: center;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            letter-spacing: 0.06em;
+            padding-bottom: 16px;
+            transition: opacity 0.5s ease;
+        }
+        .envelope-letter-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.7s cubic-bezier(0.25, 0.8, 0.25, 1.2), padding 0.7s ease, opacity 0.5s ease;
+            opacity: 0;
+            padding: 0 22px;
+            background: rgba(30, 22, 18, 0.5);
+            margin: 0 12px;
+            border-radius: 10px;
+        }
+        .envelope-outer.opened .envelope-letter-content {
+            max-height: 2000px;
+            opacity: 1;
+            padding: 20px 22px 24px;
+        }
+        .envelope-outer.opened .seal-wax {
+            transform: scale(0.3);
+            opacity: 0;
+            box-shadow: 0 0 0px transparent;
+        }
+        .envelope-outer.opened .envelope-flap-hint {
+            opacity: 0;
+        }
+        .envelope-outer.opened .envelope-seal {
+            padding-bottom: 4px;
+        }
+        .letter-body {
+            font-family: var(--font-serif);
+            font-size: 0.9rem;
+            color: #e8dcd0;
+            line-height: 2;
+            letter-spacing: 0.04em;
+            white-space: pre-wrap;
+            word-break: break-word;
+            text-align: justify;
+        }
+        .letter-signature {
+            text-align: right;
+            margin-top: 20px;
+            font-family: var(--font-serif);
+            font-size: 0.9rem;
+            color: var(--gold-light);
+            letter-spacing: 0.06em;
+        }
+
+        /* 信封打开状态的小装饰 */
+        .envelope-outer.opened {
+            border-color: rgba(200, 160, 120, 0.4);
+            box-shadow: 0 4px 40px rgba(180, 130, 80, 0.25), 0 0 0 1px rgba(200, 150, 100, 0.15);
+        }
+
+        /* ============ 承诺区域 ============ */
+        .promise-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .promise-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            background: var(--bg-card);
+            border-radius: 14px;
+            padding: 16px 18px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            transition: all 0.3s ease;
+        }
+        .promise-dot {
+            flex-shrink: 0;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--gold);
+            margin-top: 7px;
+            box-shadow: 0 0 10px rgba(200, 160, 120, 0.6);
+        }
+        .promise-text {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            letter-spacing: 0.03em;
+            line-height: 1.7;
+        }
+        .promise-text strong {
+            color: var(--gold-light);
+            font-weight: 500;
+        }
+
+        /* ============ 结尾区域 ============ */
+        .ending-section {
+            text-align: center;
+            padding: 30px 10px;
+        }
+        .ending-heart {
+            font-size: 2.5rem;
+            display: block;
+            margin-bottom: 16px;
+            animation: heartBeat 1.6s ease-in-out infinite;
+            color: var(--rose);
+            text-shadow: 0 0 30px rgba(210, 130, 120, 0.5);
+        }
+        @keyframes heartBeat {
+            0%,
+            100% {
+                transform: scale(1);
+            }
+            15% {
+                transform: scale(1.18);
+            }
+            30% {
+                transform: scale(1);
+            }
+            45% {
+                transform: scale(1.12);
+            }
+            60% {
+                transform: scale(1);
+            }
+        }
+        .ending-text {
+            font-family: var(--font-serif);
+            font-size: 1.1rem;
+            color: var(--text-primary);
+            letter-spacing: 0.05em;
+            line-height: 1.8;
+            margin-bottom: 8px;
+        }
+        .ending-subtext {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            letter-spacing: 0.04em;
+        }
+
+        /* ============ 底部光晕装饰 ============ */
+        .glow-orb {
+            position: fixed;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 0;
+            filter: blur(80px);
+            opacity: 0.08;
+        }
+        .glow-orb.top-right {
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, #c9a87c, transparent);
+            top: -60px;
+            right: -60px;
+            animation: orbFloat 8s ease-in-out infinite;
+        }
+        .glow-orb.bottom-left {
+            width: 180px;
+            height: 180px;
+            background: radial-gradient(circle, #b8867e, transparent);
+            bottom: -50px;
+            left: -50px;
+            animation: orbFloat 10s ease-in-out infinite reverse;
+        }
+        @keyframes orbFloat {
+            0%,
+            100% {
+                transform: translate(0, 0);
+            }
+            25% {
+                transform: translate(15px, -20px);
+            }
+            50% {
+                transform: translate(-10px, -10px);
+            }
+            75% {
+                transform: translate(10px, 15px);
+            }
+        }
+
+        /* ============ 响应式微调 ============ */
+        @media screen and (max-width: 380px) {
+            .hero-title {
+                font-size: 1.7rem;
+            }
+            .section-title {
+                font-size: 1.3rem;
+            }
+            .letter-body {
+                font-size: 0.82rem;
+                line-height: 1.9;
+            }
+            .reflection-card {
+                padding: 16px 14px;
+            }
+            .reflection-card .card-text {
+                font-size: 0.8rem;
+            }
+            .promise-text {
+                font-size: 0.8rem;
+            }
+            .envelope-letter-content {
+                padding: 0 14px;
+            }
+            .envelope-outer.opened .envelope-letter-content {
+                padding: 16px 14px 20px;
+            }
+        }
+        @media screen and (min-width: 420px) {
+            .hero-title {
+                font-size: 2.3rem;
+            }
+            .section-title {
+                font-size: 1.55rem;
+            }
+            .letter-body {
+                font-size: 0.95rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 星空画布 -->
+    <canvas id="starCanvas" aria-hidden="true"></canvas>
+
+    <!-- 氛围光晕 -->
+    <div class="glow-orb top-right"></div>
+    <div class="glow-orb bottom-left"></div>
+
+    <!-- 主内容 -->
+    <div class="main-container">
+
+        <!-- ==================== Hero 开场 ==================== -->
+        <section class="hero-section">
+            <div class="hero-moon"></div>
+            <h1 class="hero-title">给你的一封信</h1>
+            <p class="hero-subtitle">有些话，我早该认真说给你听。<br>请你给我几分钟，好吗？</p>
+            <div class="hero-scroll-hint">
+                <span>向下滑动</span>
+                <div class="scroll-arrow"></div>
+            </div>
+        </section>
+
+        <!-- ==================== 反思区域 ==================== -->
+        <section class="section" data-animate>
+            <div class="section-label">✦ 我听到了</div>
+            <h2 class="section-title">那些你曾说过的话，<br>我现在真的听懂了</h2>
+            <div class="reflection-cards">
+                <!-- 卡片1：关于责任 -->
+                <div class="reflection-card">
+                    <span class="card-icon">🕯️</span>
+                    <div class="card-title">关于「承担责任」</div>
+                    <div class="card-text">
+                        你说觉得我没有承担责任的能力。我回想了很多事，才明白你说的不是某一件事，而是很多个瞬间的累积——是我在需要站出来的时候退缩了，在需要我做决定的时候把问题推给了你，在你最需要依靠的时候让你觉得只有自己一个人。
+                    </div>
+                    <span class="card-highlight">我明白了：责任不是口号，是每一天的行动。</span>
+                </div>
+                <!-- 卡片2：关于听懂 -->
+                <div class="reflection-card">
+                    <span class="card-icon">🌙</span>
+                    <div class="card-title">关于「听不懂你说话」</div>
+                    <div class="card-text">
+                        我以前总以为自己在听，但其实我听到的是字面，却没有听懂你的情绪、你的需求、你藏在话里的期待。你反复说同一件事不是因为啰嗦，而是因为我从来没有真正回应到你心里去。让你一遍遍重复，是我的错。
+                    </div>
+                    <span class="card-highlight">我明白了：听，是要听到心里去，而不只是耳朵。</span>
+                </div>
+                <!-- 卡片3：关于陌生人 -->
+                <div class="reflection-card">
+                    <span class="card-icon">🪷</span>
+                    <div class="card-title">关于「变成陌生人」</div>
+                    <div class="card-text">
+                        你曾说觉得我越来越陌生。这句话让我心碎，也让我惊醒。是我在日复一日的懈怠中，忘记了你最初认识的那个我是什么样子。我弄丢了那个认真、用心、把你放在心尖上的人。但现在我找到他了，我想让你重新认识他。
+                    </div>
+                    <span class="card-highlight">我明白了：爱需要持续的用心，而不是得到了就松懈。</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== 信件区域 ==================== -->
+        <section class="section" data-animate>
+            <div class="section-label">✉️ 写给你的信</div>
+            <h2 class="section-title">一封我用心写下的信</h2>
+            <div class="letter-wrapper">
+                <div class="envelope-outer" id="envelope" role="button" aria-label="点击打开信封">
+                    <div class="envelope-seal">
+                        <div class="seal-wax"></div>
+                    </div>
+                    <div class="envelope-flap-hint">轻点封蜡 · 打开信封</div>
+                    <div class="envelope-letter-content" id="letterContent">
+                        <!--
+                        ╔══════════════════════════════════════╗
+                        ║   👆 请替换下方为你的信件正文 👆   ║
+                        ║   保留 letter-body 这个 class      ║
+                        ║   段落之间用空行分隔即可           ║
+                        ╚══════════════════════════════════════╝
+                        -->
+                        <div class="letter-body">
+                            亲爱的：
+
+                            提笔写下这封信的时候，我想起了很多很多。
+
+                            想起我们刚认识的时候，想起你对我笑的样子，想起你靠在我肩膀上轻声说话的那些夜晚。那些画面那么清晰，仿佛就在昨天。可我知道，后来是我让这些美好蒙上了灰尘。
+
+                            这段时间我反复地想，到底是什么让我们走到了今天这一步。你说失望是累积的，我用了很久才真正理解这句话的分量。不是某一件事，不是某一次争吵，而是一次又一次我没有做到的承诺，一个又一个我没有回应好的瞬间，一点一滴堆成了你心里的墙。
+
+                            我知道这封信可能来晚了。但我还是想让你知道——我没有逃避，我在面对，我在认真地反省自己。
+
+                            你值得一个能接住你情绪的人，一个你不用说第二遍就能懂你的人，一个让你觉得安心而不是心累的人。以前我没有做到，但从现在开始，我想成为那样的人。不是为了挽回而临时改变，而是我真的想明白了。
+
+                            我不求你马上原谅我，也不求你立刻回头。我只希望你能看到，这一次我是真的用心了。
+
+                            如果你愿意，我想用接下来的每一天，重新让你认识我。
+                        </div>
+                        <div class="letter-signature">—— 一直爱着你的人</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== 承诺区域 ==================== -->
+        <section class="section" data-animate>
+            <div class="section-label">🤍 我的承诺</div>
+            <h2 class="section-title">不是空洞的保证，<br>是我想做到的改变</h2>
+            <div class="promise-list">
+                <div class="promise-item">
+                    <div class="promise-dot"></div>
+                    <div class="promise-text"><strong>学会倾听：</strong>当你说话时，我会放下手机，看着你的眼睛，用心去理解你说的话和话里的情绪。如果我听不懂，我会认真问你，而不是敷衍过去。</div>
+                </div>
+                <div class="promise-item">
+                    <div class="promise-dot"></div>
+                    <div class="promise-text"><strong>承担责任：</strong>遇到问题我不再逃避，不再把难题都推给你。我会站出来，做那个你可以依靠的人，用行动而不是空话来证明。</div>
+                </div>
+                <div class="promise-item">
+                    <div class="promise-dot"></div>
+                    <div class="promise-text"><strong>保持沟通：</strong>我会主动和你分享我的想法和感受，不再让你猜，也不再让你一个人扛着所有的情绪。好的关系需要坦诚，我会做到。</div>
+                </div>
+                <div class="promise-item">
+                    <div class="promise-dot"></div>
+                    <div class="promise-text"><strong>珍惜每一天：</strong>不再把一切当成理所当然。每一个和你有关的瞬间，我都会用心对待。让你感受到被在乎、被重视、被坚定地选择。</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== 结尾区域 ==================== -->
+        <section class="section ending-section" data-animate>
+            <span class="ending-heart">♡</span>
+            <p class="ending-text">
+                我不奢求一封信就能让你回头。<br>
+                但我想让你知道——<br>
+                这一次，我是真的用心了。
+            </p>
+            <p class="ending-subtext">
+                如果你愿意，我就在这里。<br>
+                不急，不催，不等你说原谅。<br>
+                只想用行动，让你重新认识我。
+            </p>
+        </section>
+
+    </div>
+
+    <script>
+        (function() {
+            // ============ 星空 Canvas ============
+            const canvas = document.getElementById('starCanvas');
+            const ctx = canvas.getContext('2d');
+            let stars = [];
+            let animationId;
+            let mouseX = -1000;
+            let mouseY = -1000;
+            let isReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+            function resizeCanvas() {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            }
+
+            function createStars() {
+                const count = Math.min(Math.floor((canvas.width * canvas.height) / 5500), 150);
+                stars = [];
+                for (let i = 0; i < count; i++) {
+                    stars.push({
+                        x: Math.random() * canvas.width,
+                        y: Math.random() * canvas.height,
+                        radius: Math.random() * 1.6 + 0.4,
+                        baseAlpha: Math.random() * 0.7 + 0.2,
+                        alpha: Math.random() * 0.7 + 0.2,
+                        twinkleSpeed: Math.random() * 0.015 + 0.005,
+                        twinkleOffset: Math.random() * Math.PI * 2,
+                        driftX: (Math.random() - 0.5) * 0.15,
+                        driftY: (Math.random() - 0.5) * 0.15,
+                        hue: Math.random() < 0.15 ? 35 + Math.random() * 20 : 220 + Math.random() * 40,
+                        saturation: Math.random() < 0.15 ? '60%' : '30%',
+                    });
+                }
+            }
+
+            function drawStars(time) {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                // 柔和星云光晕
+                const gradientCenter = ctx.createRadialGradient(
+                    canvas.width * 0.7, canvas.height * 0.3, 0,
+                    canvas.width * 0.7, canvas.height * 0.3, canvas.width * 0.45
+                );
+                gradientCenter.addColorStop(0, 'rgba(140,120,180,0.04)');
+                gradientCenter.addColorStop(0.5, 'rgba(100,80,140,0.02)');
+                gradientCenter.addColorStop(1, 'rgba(0,0,0,0)');
+                ctx.fillStyle = gradientCenter;
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+                const gradientLower = ctx.createRadialGradient(
+                    canvas.width * 0.25, canvas.height * 0.7, 0,
+                    canvas.width * 0.25, canvas.height * 0.7, canvas.width * 0.4
+                );
+                gradientLower.addColorStop(0, 'rgba(160,120,100,0.04)');
+                gradientLower.addColorStop(0.5, 'rgba(120,80,60,0.02)');
+                gradientLower.addColorStop(1, 'rgba(0,0,0,0)');
+                ctx.fillStyle = gradientLower;
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+                // 绘制星星
+                for (const star of stars) {
+                    if (!isReducedMotion) {
+                        star.alpha = star.baseAlpha + Math.sin(time * star.twinkleSpeed + star.twinkleOffset) * 0.25;
+                        star.alpha = Math.max(0.08, Math.min(0.95, star.alpha));
+                        star.x += star.driftX;
+                        star.y += star.driftY;
+                        if (star.x < -10) star.x = canvas.width + 10;
+                        if (star.x > canvas.width + 10) star.x = -10;
+                        if (star.y < -10) star.y = canvas.height + 10;
+                        if (star.y > canvas.height + 10) star.y = -10;
+                    }
+
+                    const distToMouse = Math.hypot(star.x - mouseX, star.y - mouseY);
+                    const glowBoost = distToMouse < 120 ? (1 - distToMouse / 120) * 0.5 : 0;
+
+                    ctx.beginPath();
+                    ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
+                    const alpha = Math.min(1, star.alpha + glowBoost);
+                    ctx.fillStyle = `hsla(${star.hue}, ${star.saturation}, 85%, ${alpha})`;
+                    ctx.fill();
+
+                    // 亮星加光晕
+                    if (star.radius > 1.1 || glowBoost > 0.15) {
+                        const glow = ctx.createRadialGradient(star.x, star.y, star.radius * 0.3, star.x, star.y, star
+                            .radius * 4);
+                        const glowAlpha = alpha * 0.5;
+                        glow.addColorStop(0, `hsla(${star.hue}, ${star.saturation}, 90%, ${glowAlpha})`);
+                        glow.addColorStop(1, 'rgba(0,0,0,0)');
+                        ctx.beginPath();
+                        ctx.arc(star.x, star.y, star.radius * 4, 0, Math.PI * 2);
+                        ctx.fillStyle = glow;
+                        ctx.fill();
+                    }
+                }
+
+                // 偶尔流星
+                if (!isReducedMotion && Math.random() < 0.003) {
+                    spawnShootingStar();
+                }
+                drawShootingStars(time);
+            }
+
+            // 流星
+            let shootingStars = [];
+
+            function spawnShootingStar() {
+                shootingStars.push({
+                    x: Math.random() * canvas.width * 0.8,
+                    y: Math.random() * canvas.height * 0.4,
+                    length: 60 + Math.random() * 100,
+                    speed: 6 + Math.random() * 10,
+                    angle: Math.PI / 4 + (Math.random() - 0.5) * 0.4,
+                    life: 1,
+                    decay: 0.015 + Math.random() * 0.03,
+                });
+                if (shootingStars.length > 3) shootingStars.shift();
+            }
+
+            function drawShootingStars(time) {
+                for (let i = shootingStars.length - 1; i >= 0; i--) {
+                    const s = shootingStars[i];
+                    s.life -= s.decay;
+                    if (s.life <= 0) {
+                        shootingStars.splice(i, 1);
+                        continue;
+                    }
+                    const endX = s.x - Math.cos(s.angle) * s.length;
+                    const endY = s.y - Math.sin(s.angle) * s.length;
+                    const grad = ctx.createLinearGradient(s.x, s.y, endX, endY);
+                    grad.addColorStop(0, `rgba(255,240,220,${s.life * 0.9})`);
+                    grad.addColorStop(1, 'rgba(255,240,220,0)');
+                    ctx.beginPath();
+                    ctx.moveTo(s.x, s.y);
+                    ctx.lineTo(endX, endY);
+                    ctx.strokeStyle = grad;
+                    ctx.lineWidth = 1.2;
+                    ctx.stroke();
+                    s.x -= Math.cos(s.angle) * s.speed;
+                    s.y -= Math.sin(s.angle) * s.speed;
+                }
+            }
+
+            function animate(time) {
+                drawStars(time);
+                animationId = requestAnimationFrame(animate);
+            }
+
+            // 鼠标/触摸追踪（用于星星靠近时变亮）
+            function onPointerMove(e) {
+                mouseX = e.clientX;
+                mouseY = e.clientY;
+            }
+
+            function onTouchMove(e) {
+                if (e.touches.length > 0) {
+                    mouseX = e.touches[0].clientX;
+                    mouseY = e.touches[0].clientY;
+                }
+            }
+
+            function initStars() {
+                resizeCanvas();
+                createStars();
+                cancelAnimationFrame(animationId);
+                animationId = requestAnimationFrame(animate);
+            }
+
+            window.addEventListener('resize', () => {
+                resizeCanvas();
+                createStars();
+            });
+            window.addEventListener('pointermove', onPointerMove, { passive: true });
+            window.addEventListener('touchmove', onTouchMove, { passive: true });
+            window.addEventListener('orientationchange', () => {
+                setTimeout(() => {
+                    resizeCanvas();
+                    createStars();
+                }, 400);
+            });
+
+            // 页面不可见时暂停动画以节省资源
+            document.addEventListener('visibilitychange', () => {
+                if (document.hidden) {
+                    cancelAnimationFrame(animationId);
+                } else {
+                    animationId = requestAnimationFrame(animate);
+                }
+            });
+
+            initStars();
+
+            // ============ 滚动触发动画 (Intersection Observer) ============
+            const animatedSections = document.querySelectorAll('.section[data-animate]');
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px 0px -40px 0px',
+                threshold: 0.15,
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            animatedSections.forEach(section => {
+                observer.observe(section);
+            });
+
+            // ============ 信封打开交互 ============
+            const envelope = document.getElementById('envelope');
+            const letterContent = document.getElementById('letterContent');
+            let isOpened = false;
+
+            function openEnvelope(e) {
+                if (isOpened) return;
+                e.preventDefault();
+                e.stopPropagation();
+                isOpened = true;
+                envelope.classList.add('opened');
+
+                // 打开后自动滚动到信件内容顶部
+                setTimeout(() => {
+                    const rect = letterContent.getBoundingClientRect();
+                    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                    const targetY = scrollTop + rect.top - 80;
+                    window.scrollTo({
+                        top: targetY,
+                        behavior: 'smooth',
+                    });
+                }, 400);
+            }
+
+            envelope.addEventListener('click', openEnvelope);
+            envelope.addEventListener('touchend', function(e) {
+                // 防止双击缩放等问题
+                if (!isOpened) {
+                    openEnvelope(e);
+                }
+            });
+
+            // ============ 点击页面任意位置飘出小光点 ============
+            function createSparkle(x, y) {
+                const sparkle = document.createElement('div');
+                sparkle.style.cssText = `
+                    position: fixed;
+                    left: ${x}px;
+                    top: ${y}px;
+                    width: 6px;
+                    height: 6px;
+                    border-radius: 50%;
+                    background: rgba(220,190,150,0.9);
+                    pointer-events: none;
+                    z-index: 999;
+                    animation: sparkleFade 1.2s ease-out forwards;
+                `;
+                document.body.appendChild(sparkle);
+                setTimeout(() => sparkle.remove(), 1300);
+            }
+
+            // 注入飘散动画的 keyframes
+            const sparkleStyle = document.createElement('style');
+            sparkleStyle.textContent = `
+                @keyframes sparkleFade {
+                    0% { transform: translate(0,0) scale(1); opacity: 0.9; }
+                    50% { transform: translate(${(Math.random()-0.5)*40}px, -40px) scale(1.8); opacity: 0.6; }
+                    100% { transform: translate(${(Math.random()-0.5)*60}px, -90px) scale(0); opacity: 0; }
+                }
+            `;
+            document.head.appendChild(sparkleStyle);
+
+            document.addEventListener('click', function(e) {
+                // 不在信封区域时触发（避免冲突）
+                if (!envelope.contains(e.target)) {
+                    createSparkle(e.clientX, e.clientY);
+                }
+            });
+
+            // ============ 初始滚动提示（几秒后自动渐隐） ============
+            const scrollHint = document.querySelector('.hero-scroll-hint');
+            if (scrollHint && !isReducedMotion) {
+                setTimeout(() => {
+                    scrollHint.style.transition = 'opacity 2s ease';
+                    scrollHint.style.opacity = '0';
+                }, 8000);
+                // 用户开始滚动后就彻底隐藏
+                let hintHidden = false;
+                window.addEventListener('scroll', function hideHint() {
+                    if (!hintHidden && window.scrollY > 30) {
+                        hintHidden = true;
+                        scrollHint.style.transition = 'opacity 0.6s ease';
+                        scrollHint.style.opacity = '0';
+                        window.removeEventListener('scroll', hideHint);
+                    }
+                }, { passive: true });
+            }
+
+            console.log('✨ 页面已就绪 — 用心去做，剩下的交给时间。');
+        })();
+    </script>
+</body>
+</html>
