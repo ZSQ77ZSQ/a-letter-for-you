@@ -1,4 +1,4 @@
-这是根据你的要求修改后的网页。已删除史迪仔形象，移除了之前的结尾句子，并将信中最温暖的那段话放到了页面底部，同时画上了小猫、小狗和一对恋人的卡通图案。
+已经按照你的要求调整好了：删掉了那句标题，反思卡片的排版也变得更紧凑，这样能让她更快看到信的内容，同时不会影响页面其他部分的温馨感。
 ```html
 <!DOCTYPE html>
 <html lang="zh-CN">
@@ -164,44 +164,49 @@
             line-height: 1.4;
         }
 
+        /* 反思卡片 - 紧凑版 */
         .reflection-cards {
             display: flex;
             flex-direction: column;
-            gap: 14px;
+            gap: 10px;
         }
         .reflection-card {
             background: var(--bg-card);
-            border: 1px solid rgba(200, 160, 120, 0.4);
-            border-radius: 18px;
-            padding: 18px 18px;
+            border: 1px solid rgba(200, 160, 120, 0.35);
+            border-radius: 14px;
+            padding: 12px 14px;
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
-            box-shadow: var(--shadow-card);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
             transition: transform 0.3s;
         }
         .reflection-card .card-icon {
-            font-size: 1.5rem;
-            margin-bottom: 6px;
+            font-size: 1.2rem;
+            margin-bottom: 4px;
+            display: inline-block;
         }
         .reflection-card .card-title {
-            font-size: 0.9rem;
+            font-size: 0.8rem;
             font-weight: 600;
             color: #b5744a;
-            margin-bottom: 6px;
+            margin-bottom: 4px;
+            display: inline;
+            margin-left: 4px;
         }
         .reflection-card .card-text {
-            font-size: 0.85rem;
+            font-size: 0.78rem;
             color: #5e4d3e;
-            line-height: 1.7;
+            line-height: 1.6;
+            margin-top: 4px;
         }
         .card-highlight {
             display: inline-block;
-            margin-top: 8px;
-            font-size: 0.8rem;
+            margin-top: 6px;
+            font-size: 0.72rem;
             color: #c2846a;
             font-weight: 600;
-            padding: 4px 12px;
-            border: 1px solid rgba(180, 130, 120, 0.5);
+            padding: 2px 10px;
+            border: 1px solid rgba(180, 130, 120, 0.4);
             border-radius: 20px;
             background: rgba(255, 240, 230, 0.7);
         }
@@ -323,6 +328,16 @@
                 font-size: 0.8rem;
                 line-height: 2;
             }
+            .reflection-card {
+                padding: 10px 12px;
+            }
+            .reflection-card .card-text {
+                font-size: 0.74rem;
+            }
+            .card-highlight {
+                font-size: 0.7rem;
+                padding: 2px 8px;
+            }
         }
     </style>
 </head>
@@ -337,26 +352,26 @@
             <p class="hero-subtitle">有些话，我想认真说给你听。<br>下面这封信，是我全部的真心。</p>
         </section>
 
-        <!-- 反思卡片 -->
+        <!-- 反思卡片（紧凑版，无大标题） -->
         <section class="section" data-animate>
             <div class="section-label">✦ 我听到了</div>
-            <h2 class="section-title">那些你曾说过的话，<br>我现在真的听懂了</h2>
+            <!-- 删除了原来的 h2 标题 -->
             <div class="reflection-cards">
                 <div class="reflection-card">
                     <span class="card-icon">🕯️</span>
-                    <div class="card-title">关于「承担责任」</div>
+                    <span class="card-title">关于「承担责任」</span>
                     <div class="card-text">你说觉得我没有承担责任的能力。我回想了很多事，才明白那是很多个瞬间的累积——我在需要站出来的时候退缩了，让你一个人面对。</div>
                     <span class="card-highlight">我明白了：责任不是口号，是每一天的行动。</span>
                 </div>
                 <div class="reflection-card">
                     <span class="card-icon">🌙</span>
-                    <div class="card-title">关于「听不懂你说话」</div>
+                    <span class="card-title">关于「听不懂你说话」</span>
                     <div class="card-text">我以前总以为自己在听，但听到的只是字面，没有懂你的情绪和期待。让你一遍遍重复，是我的错。</div>
                     <span class="card-highlight">我明白了：听，是要听到心里去。</span>
                 </div>
                 <div class="reflection-card">
                     <span class="card-icon">🪷</span>
-                    <div class="card-title">关于「变成陌生人」</div>
+                    <span class="card-title">关于「变成陌生人」</span>
                     <div class="card-text">你曾说觉得我越来越陌生。我弄丢了那个用心把你放在心尖上的人。但现在我找到他了，我想让你重新认识他。</div>
                     <span class="card-highlight">我明白了：爱需要持续的用心。</span>
                 </div>
@@ -605,21 +620,17 @@
                 ctx.closePath();
             }
 
-            // 画小猫
             function drawCat(x, y) {
                 ctx.save();
                 ctx.translate(x, y);
-                // 身体
                 ctx.fillStyle = '#f7b05e';
                 ctx.beginPath();
                 ctx.ellipse(0, 0, 12, 14, 0, 0, Math.PI * 2);
                 ctx.fill();
-                // 头
                 ctx.fillStyle = '#f7b05e';
                 ctx.beginPath();
                 ctx.arc(0, -16, 10, 0, Math.PI * 2);
                 ctx.fill();
-                // 耳朵
                 ctx.fillStyle = '#f7b05e';
                 ctx.beginPath();
                 ctx.moveTo(-8, -22);
@@ -631,7 +642,6 @@
                 ctx.lineTo(4, -30);
                 ctx.lineTo(0, -22);
                 ctx.fill();
-                // 眼睛
                 ctx.fillStyle = '#3e2e23';
                 ctx.beginPath();
                 ctx.arc(-4, -18, 2, 0, Math.PI * 2);
@@ -639,7 +649,6 @@
                 ctx.beginPath();
                 ctx.arc(4, -18, 2, 0, Math.PI * 2);
                 ctx.fill();
-                // 尾巴
                 ctx.strokeStyle = '#f7b05e';
                 ctx.lineWidth = 3;
                 ctx.beginPath();
@@ -649,21 +658,17 @@
                 ctx.restore();
             }
 
-            // 画小狗
             function drawDog(x, y) {
                 ctx.save();
                 ctx.translate(x, y);
-                // 身体
                 ctx.fillStyle = '#d4a373';
                 ctx.beginPath();
                 ctx.ellipse(0, 0, 14, 16, 0, 0, Math.PI * 2);
                 ctx.fill();
-                // 头
                 ctx.fillStyle = '#d4a373';
                 ctx.beginPath();
                 ctx.arc(0, -18, 12, 0, Math.PI * 2);
                 ctx.fill();
-                // 耳朵
                 ctx.fillStyle = '#b3804d';
                 ctx.beginPath();
                 ctx.ellipse(-10, -22, 5, 9, -0.3, 0, Math.PI * 2);
@@ -671,7 +676,6 @@
                 ctx.beginPath();
                 ctx.ellipse(10, -22, 5, 9, 0.3, 0, Math.PI * 2);
                 ctx.fill();
-                // 眼睛
                 ctx.fillStyle = '#3e2e23';
                 ctx.beginPath();
                 ctx.arc(-4, -20, 2, 0, Math.PI * 2);
@@ -679,12 +683,10 @@
                 ctx.beginPath();
                 ctx.arc(4, -20, 2, 0, Math.PI * 2);
                 ctx.fill();
-                // 鼻子
                 ctx.fillStyle = '#3e2e23';
                 ctx.beginPath();
                 ctx.arc(0, -15, 3, 0, Math.PI * 2);
                 ctx.fill();
-                // 尾巴
                 ctx.strokeStyle = '#d4a373';
                 ctx.lineWidth = 3;
                 ctx.beginPath();
@@ -694,32 +696,27 @@
                 ctx.restore();
             }
 
-            // 画两个恋人（简笔相依）
             function drawCouple(x, y) {
                 ctx.save();
                 ctx.translate(x, y);
-                // 左边的人（稍高）
                 ctx.fillStyle = '#e0a899';
                 ctx.beginPath();
                 ctx.arc(-9, -24, 7, 0, Math.PI * 2);
                 ctx.fill();
                 ctx.fillStyle = '#4a6fa5';
                 ctx.fillRect(-14, -17, 10, 16);
-                // 右边的人（稍矮，靠在一起）
                 ctx.fillStyle = '#e0a899';
                 ctx.beginPath();
                 ctx.arc(9, -22, 6, 0, Math.PI * 2);
                 ctx.fill();
                 ctx.fillStyle = '#c47a6b';
                 ctx.fillRect(5, -16, 8, 14);
-                // 牵手
                 ctx.strokeStyle = '#e0a899';
                 ctx.lineWidth = 2;
                 ctx.beginPath();
                 ctx.moveTo(-5, -10);
                 ctx.lineTo(5, -9);
                 ctx.stroke();
-                // 爱心
                 ctx.fillStyle = '#e06666';
                 ctx.beginPath();
                 ctx.arc(-5, -30, 3, 0, Math.PI);
@@ -752,13 +749,11 @@
                 drawShellsAndStarfish();
                 drawSeagullsCartoon(time);
 
-                // 小猫小狗和恋人放在沙滩右侧
                 const baseY = h - 32;
                 drawCat(w - 180, baseY);
                 drawDog(w - 140, baseY);
                 drawCouple(w - 90, baseY - 2);
 
-                // 小沙桶
                 ctx.fillStyle = '#e09e6e';
                 ctx.fillRect(30, h - 45, 18, 22);
                 ctx.fillStyle = '#c57e4a';
