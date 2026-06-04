@@ -5,24 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta property="og:title" content="给你的一封信">
-    <meta property="og:description" content="用心写给你的话，请你看看">
-    <meta property="og:type" content="website">
     <title>给你的一封信</title>
     <style>
         :root {
-            --bg-deep: #07071a;
-            --bg-card: rgba(20, 16, 40, 0.75);
+            --bg-deep: #0a2a35;
+            --bg-card: rgba(18, 55, 70, 0.7);
             --gold: #c9a87c;
             --gold-light: #e0cba0;
             --rose: #d4857a;
-            --text-primary: #e8e0d8;
-            --text-secondary: #c4bdb4;
-            --text-muted: #9a938a;
+            --text-primary: #f0ebe0;
+            --text-secondary: #dcd5c8;
+            --text-muted: #b9b0a2;
             --accent: #b8867e;
             --accent-soft: #c49d95;
-            --border-glow: rgba(200, 160, 120, 0.25);
-            --shadow-card: 0 4px 30px rgba(0, 0, 0, 0.5);
+            --border-glow: rgba(200, 160, 120, 0.35);
+            --shadow-card: 0 4px 30px rgba(0, 0, 0, 0.4);
             --font-cn: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans SC", sans-serif;
             --font-serif: "Noto Serif SC", "STSong", "Songti SC", "SimSun", "KaiTi", "楷体", serif;
         }
@@ -37,7 +34,6 @@
             scroll-behavior: smooth;
             -webkit-tap-highlight-color: transparent;
             -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
         }
 
         body {
@@ -53,8 +49,8 @@
             letter-spacing: 0.02em;
         }
 
-        /* ============ 星空 Canvas 背景 ============ */
-        #starCanvas {
+        /* ============ 大海沙滩 Canvas 背景 ============ */
+        #beachCanvas {
             position: fixed;
             top: 0;
             left: 0;
@@ -90,34 +86,34 @@
             position: relative;
         }
 
-        .hero-moon {
-            width: 70px;
-            height: 70px;
+        .hero-sun {
+            width: 80px;
+            height: 80px;
             border-radius: 50%;
-            background: radial-gradient(circle at 35% 35%, #f5e6d3 0%, #e8d5bc 20%, #c9a87c 50%, #8b6f4e 80%, #3d2e1f 100%);
-            box-shadow: 0 0 60px rgba(220, 180, 140, 0.5), 0 0 120px rgba(200, 150, 100, 0.3), 0 0 200px rgba(180, 130, 80, 0.15);
-            margin-bottom: 40px;
-            animation: moonPulse 4s ease-in-out infinite;
+            background: radial-gradient(circle at 40% 40%, #ffe7c4 0%, #fcd49b 25%, #f0a85a 55%, #c9733a 80%, #6e3a1c 100%);
+            box-shadow: 0 0 80px rgba(255, 200, 120, 0.6), 0 0 160px rgba(240, 160, 80, 0.35), 0 0 240px rgba(220, 140, 60, 0.15);
+            margin-bottom: 36px;
+            animation: sunPulse 5s ease-in-out infinite;
             position: relative;
         }
-        .hero-moon::after {
+        .hero-sun::after {
             content: '';
             position: absolute;
-            top: 12px;
-            left: 16px;
-            width: 14px;
-            height: 14px;
+            top: 15px;
+            left: 18px;
+            width: 18px;
+            height: 18px;
             border-radius: 50%;
-            background: rgba(255, 240, 220, 0.5);
-            filter: blur(3px);
+            background: rgba(255, 250, 240, 0.6);
+            filter: blur(5px);
         }
-        @keyframes moonPulse {
+        @keyframes sunPulse {
             0%,
             100% {
-                box-shadow: 0 0 60px rgba(220, 180, 140, 0.5), 0 0 120px rgba(200, 150, 100, 0.3), 0 0 200px rgba(180, 130, 80, 0.15);
+                box-shadow: 0 0 80px rgba(255, 200, 120, 0.6), 0 0 160px rgba(240, 160, 80, 0.35), 0 0 240px rgba(220, 140, 60, 0.15);
             }
             50% {
-                box-shadow: 0 0 80px rgba(230, 190, 150, 0.65), 0 0 150px rgba(210, 160, 110, 0.4), 0 0 240px rgba(190, 140, 90, 0.2);
+                box-shadow: 0 0 100px rgba(255, 210, 130, 0.75), 0 0 190px rgba(245, 170, 90, 0.45), 0 0 280px rgba(230, 150, 70, 0.2);
             }
         }
 
@@ -155,7 +151,7 @@
 
         .hero-scroll-hint {
             position: absolute;
-            bottom: 40px;
+            bottom: 50px;
             left: 50%;
             transform: translateX(-50%);
             display: flex;
@@ -234,8 +230,8 @@
             padding: 22px 20px;
             position: relative;
             overflow: hidden;
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
             transition: all 0.4s ease;
             box-shadow: var(--shadow-card);
         }
@@ -292,14 +288,13 @@
             border-radius: 18px;
             overflow: hidden;
             box-shadow: var(--shadow-card);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
             cursor: pointer;
             transition: all 0.5s ease;
             position: relative;
             -webkit-tap-highlight-color: transparent;
             user-select: none;
-            -webkit-user-select: none;
         }
         .envelope-outer:active {
             transform: scale(0.97);
@@ -317,8 +312,8 @@
             width: 44px;
             height: 44px;
             border-radius: 50%;
-            background: radial-gradient(circle at 40% 35%, #c94a4a 0%, #8b2020 50%, #5a1010 80%, #3d0808 100%);
-            box-shadow: 0 4px 20px rgba(180, 40, 40, 0.5), inset 0 2px 4px rgba(255, 180, 180, 0.3);
+            background: radial-gradient(circle at 40% 35%, #e07b6b 0%, #b54a3a 40%, #7a2a1e 70%, #4a180e 100%);
+            box-shadow: 0 4px 20px rgba(180, 70, 40, 0.5), inset 0 2px 4px rgba(255, 200, 180, 0.3);
             position: relative;
             transition: all 0.6s ease;
             z-index: 2;
@@ -347,12 +342,12 @@
             transition: max-height 0.7s cubic-bezier(0.25, 0.8, 0.25, 1.2), padding 0.7s ease, opacity 0.5s ease;
             opacity: 0;
             padding: 0 22px;
-            background: rgba(30, 22, 18, 0.5);
+            background: rgba(25, 45, 55, 0.5);
             margin: 0 12px;
             border-radius: 10px;
         }
         .envelope-outer.opened .envelope-letter-content {
-            max-height: 2000px;
+            max-height: 4000px;
             opacity: 1;
             padding: 20px 22px 24px;
         }
@@ -367,10 +362,14 @@
         .envelope-outer.opened .envelope-seal {
             padding-bottom: 4px;
         }
+        .envelope-outer.opened {
+            border-color: rgba(200, 160, 120, 0.5);
+            box-shadow: 0 4px 40px rgba(180, 130, 80, 0.3), 0 0 0 1px rgba(200, 150, 100, 0.2);
+        }
         .letter-body {
             font-family: var(--font-serif);
             font-size: 0.9rem;
-            color: #e8dcd0;
+            color: #f2e8db;
             line-height: 2;
             letter-spacing: 0.04em;
             white-space: pre-wrap;
@@ -386,12 +385,6 @@
             letter-spacing: 0.06em;
         }
 
-        /* 信封打开状态的小装饰 */
-        .envelope-outer.opened {
-            border-color: rgba(200, 160, 120, 0.4);
-            box-shadow: 0 4px 40px rgba(180, 130, 80, 0.25), 0 0 0 1px rgba(200, 150, 100, 0.15);
-        }
-
         /* ============ 承诺区域 ============ */
         .promise-list {
             display: flex;
@@ -405,9 +398,9 @@
             background: var(--bg-card);
             border-radius: 14px;
             padding: 16px 18px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             transition: all 0.3s ease;
         }
         .promise-dot {
@@ -441,7 +434,7 @@
             margin-bottom: 16px;
             animation: heartBeat 1.6s ease-in-out infinite;
             color: var(--rose);
-            text-shadow: 0 0 30px rgba(210, 130, 120, 0.5);
+            text-shadow: 0 0 30px rgba(210, 130, 120, 0.6);
         }
         @keyframes heartBeat {
             0%,
@@ -475,48 +468,7 @@
             letter-spacing: 0.04em;
         }
 
-        /* ============ 底部光晕装饰 ============ */
-        .glow-orb {
-            position: fixed;
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: 0;
-            filter: blur(80px);
-            opacity: 0.08;
-        }
-        .glow-orb.top-right {
-            width: 200px;
-            height: 200px;
-            background: radial-gradient(circle, #c9a87c, transparent);
-            top: -60px;
-            right: -60px;
-            animation: orbFloat 8s ease-in-out infinite;
-        }
-        .glow-orb.bottom-left {
-            width: 180px;
-            height: 180px;
-            background: radial-gradient(circle, #b8867e, transparent);
-            bottom: -50px;
-            left: -50px;
-            animation: orbFloat 10s ease-in-out infinite reverse;
-        }
-        @keyframes orbFloat {
-            0%,
-            100% {
-                transform: translate(0, 0);
-            }
-            25% {
-                transform: translate(15px, -20px);
-            }
-            50% {
-                transform: translate(-10px, -10px);
-            }
-            75% {
-                transform: translate(10px, 15px);
-            }
-        }
-
-        /* ============ 响应式微调 ============ */
+        /* 响应式微调 */
         @media screen and (max-width: 380px) {
             .hero-title {
                 font-size: 1.7rem;
@@ -559,19 +511,14 @@
 </head>
 <body>
 
-    <!-- 星空画布 -->
-    <canvas id="starCanvas" aria-hidden="true"></canvas>
+    <!-- 大海沙滩画布 -->
+    <canvas id="beachCanvas" aria-hidden="true"></canvas>
 
-    <!-- 氛围光晕 -->
-    <div class="glow-orb top-right"></div>
-    <div class="glow-orb bottom-left"></div>
-
-    <!-- 主内容 -->
     <div class="main-container">
 
-        <!-- ==================== Hero 开场 ==================== -->
+        <!-- Hero 开场 -->
         <section class="hero-section">
-            <div class="hero-moon"></div>
+            <div class="hero-sun"></div>
             <h1 class="hero-title">给你的一封信</h1>
             <p class="hero-subtitle">有些话，我早该认真说给你听。<br>请你给我几分钟，好吗？</p>
             <div class="hero-scroll-hint">
@@ -580,12 +527,11 @@
             </div>
         </section>
 
-        <!-- ==================== 反思区域 ==================== -->
+        <!-- 反思区域 -->
         <section class="section" data-animate>
             <div class="section-label">✦ 我听到了</div>
             <h2 class="section-title">那些你曾说过的话，<br>我现在真的听懂了</h2>
             <div class="reflection-cards">
-                <!-- 卡片1：关于责任 -->
                 <div class="reflection-card">
                     <span class="card-icon">🕯️</span>
                     <div class="card-title">关于「承担责任」</div>
@@ -594,7 +540,6 @@
                     </div>
                     <span class="card-highlight">我明白了：责任不是口号，是每一天的行动。</span>
                 </div>
-                <!-- 卡片2：关于听懂 -->
                 <div class="reflection-card">
                     <span class="card-icon">🌙</span>
                     <div class="card-title">关于「听不懂你说话」</div>
@@ -603,7 +548,6 @@
                     </div>
                     <span class="card-highlight">我明白了：听，是要听到心里去，而不只是耳朵。</span>
                 </div>
-                <!-- 卡片3：关于陌生人 -->
                 <div class="reflection-card">
                     <span class="card-icon">🪷</span>
                     <div class="card-title">关于「变成陌生人」</div>
@@ -615,7 +559,7 @@
             </div>
         </section>
 
-        <!-- ==================== 信件区域 ==================== -->
+        <!-- 信件区域 -->
         <section class="section" data-animate>
             <div class="section-label">✉️ 写给你的信</div>
             <h2 class="section-title">一封我用心写下的信</h2>
@@ -626,37 +570,31 @@
                     </div>
                     <div class="envelope-flap-hint">轻点封蜡 · 打开信封</div>
                     <div class="envelope-letter-content" id="letterContent">
-                        <!--
-                        ╔══════════════════════════════════════╗
-                        ║   👆 请替换下方为你的信件正文 👆   ║
-                        ║   保留 letter-body 这个 class      ║
-                        ║   段落之间用空行分隔即可           ║
-                        ╚══════════════════════════════════════╝
-                        -->
-                        <div class="letter-body">
-                            亲爱的：
+                        <div class="letter-body">《给你的一封信》
 
-                            提笔写下这封信的时候，我想起了很多很多。
+你最近还好吗？分开以后，我像被抽空了。每天都反反复复想我们的事，饭到嘴里咽不下去，觉也睡不了，做任何事情都提不起兴趣，有时想到胸口发闷，像喘不上气一样。
 
-                            想起我们刚认识的时候，想起你对我笑的样子，想起你靠在我肩膀上轻声说话的那些夜晚。那些画面那么清晰，仿佛就在昨天。可我知道，后来是我让这些美好蒙上了灰尘。
+我每天都会像放电影一样，一遍遍过我们以前的事。学生那会儿，我俩把校园每个角落都走遍了，还记得南区校门外那家锅盔吗，你总说你一个人吃不完，我们就一人一半分着吃。咱俩都是夜猫子，大半夜不睡觉，一起当美国人，熬到早上你说想吃糊汤粉，我俩照样精神得很，打个车就去。后来一起去健身，我教你动作，看着你推的重量一天天往上加，心里其实特高兴，练完我们就直奔串串店，那会儿的日子真好啊。要说吃饭，你是我最好的饭搭子和调味剂，还记得家旁边的萍姐火锅吗，我们每次都会点满满一桌子的肉，能比别人四个人吃得还多，吃完我会摸一下你圆滚滚的肚子问你吃饱了吗。我们还一起去了好多城市，成都看大熊猫，长沙橘子洲，石河子老街，广州塔，还有潮汕。潮汕那次是我俩第一次一起看海，海浪一下一下打在脚上，没过膝盖，我们在沙滩上写对方的名字，拍了好多好多照片。每次和你一起去一个新的地方，我心里都特别特别开心，那种开心，现在再也没有过了。
 
-                            这段时间我反复地想，到底是什么让我们走到了今天这一步。你说失望是累积的，我用了很久才真正理解这句话的分量。不是某一件事，不是某一次争吵，而是一次又一次我没有做到的承诺，一个又一个我没有回应好的瞬间，一点一滴堆成了你心里的墙。
+你身上的优点其实我一直看在眼里，也打心底里佩服。你好像天生就带着一股劲儿，生活里什么事都能理得顺顺当当，不慌不乱。对没接触过的新鲜东西，你永远充满好奇，胆子大，上手还特别快。你是我见过最有爱心的女孩，看到流浪的猫猫狗狗都会心疼，宠物救助站总能看到你的捐款。你是那么可爱和充满童真，你带着我一起看动画片，无敌破坏王和头脑特工队是我最喜欢的动画电影。你一直在积极乐观的面对一切，不管遇到什么事，都能往好了想，然后努力的去工作和生活。这些说起来好像很平常，可你知道吗，它们恰恰是我身上最缺的东西。你活成了我心底很羡慕、却一直没做到的样子。
 
-                            我知道这封信可能来晚了。但我还是想让你知道——我没有逃避，我在面对，我在认真地反省自己。
+这几年，我真的没做好。你需要倾听和安慰的时候，我在讲道理、指责你；你需要我一起面对的时候，我让你一个人扛着。这些事想起来，就让我无地自容。有一次你拖地，我没眼色地坐在那儿挡着你，你碰掉了电源线，我那正在跑模型的电脑一下子黑了。我当时火气上来，对你发了很大的火，还把错全怪在你身上。
+后来我才慢慢想明白这件事。你拖地是在为我们的家付出。我不仅没有帮你，还没有眼色的妨碍你，就算电脑真的坏了，我也根本没有任何资格去指责你。我不应该坐在电脑旁边，退一万步说就算我坐在那，我也应该和你解释：我这会有点事情需要处理，可能会影响你拖地请你见谅。那时候的我把自己的挫败和焦虑，看得比你的感受更重。现在回头看，你当时看我的眼神里，一定全是委屈。
 
-                            你值得一个能接住你情绪的人，一个你不用说第二遍就能懂你的人，一个让你觉得安心而不是心累的人。以前我没有做到，但从现在开始，我想成为那样的人。不是为了挽回而临时改变，而是我真的想明白了。
+这段时间我开始看书，往后的日子也会一样。我会去调整和学习，学会如何表达自己的爱的语言。以前很多事，是我认知上就有很大问题，现在一点点在重塑自己。我在学着怎么去表达爱，不仅是嘴上说说。我慢慢才明白，爱一个人，是要真的去懂她，尊重她的喜好和习惯，接得住她的开心，也扛得住她的难过。学着站在对方的角度去想问题，学着做一个更好的人，在她需要的时候，不是讲道理，而是无条件站在她那边。
 
-                            我不求你马上原谅我，也不求你立刻回头。我只希望你能看到，这一次我是真的用心了。
+我相信我们之前的感情和爱都是真真切切的。你说现在我们之间只剩交易，这句话像根刺，扎得我透不过气。我想起我们一路走来，从相识到在一起，经历了那么多酸甜苦辣，走到这一步有多不容易，只有我们自己最清楚。正因为这样，我真的不想就这么松开你的手。
 
-                            如果你愿意，我想用接下来的每一天，重新让你认识我。
-                        </div>
-                        <div class="letter-signature">—— 一直爱着你的人</div>
+关于以后，我还是想跟你说说，仅是一份真心的打算。今年我会沉下心来，把工作做好，把该学的东西学好，把自己调整到一个对的状态。集控大楼明年建成后，我的工作节奏会稳定很多，不用再像以前那样总是身不由己。
+
+如果你还愿意给我一个机会，我想把你接过来。我想和你认认真真地在一起，不用再隔着手机屏幕吵架了。到时候，我们可以养一只猫和一只狗，猫就懒洋洋地窝着，狗就调皮一点。休息的时候，一起牵着它们出门走走，回家后猫就趴在你腿上。那是我觉得这辈子最踏实、最好的日子了。</div>
+                        <div class="letter-signature">张世奇<br>2026.6.4</div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- ==================== 承诺区域 ==================== -->
+        <!-- 承诺区域 -->
         <section class="section" data-animate>
             <div class="section-label">🤍 我的承诺</div>
             <h2 class="section-title">不是空洞的保证，<br>是我想做到的改变</h2>
@@ -680,7 +618,7 @@
             </div>
         </section>
 
-        <!-- ==================== 结尾区域 ==================== -->
+        <!-- 结尾区域 -->
         <section class="section ending-section" data-animate>
             <span class="ending-heart">♡</span>
             <p class="ending-text">
@@ -694,191 +632,200 @@
                 只想用行动，让你重新认识我。
             </p>
         </section>
-
     </div>
 
     <script>
         (function() {
-            // ============ 星空 Canvas ============
-            const canvas = document.getElementById('starCanvas');
+            // ============ 大海沙滩 Canvas ============
+            const canvas = document.getElementById('beachCanvas');
             const ctx = canvas.getContext('2d');
-            let stars = [];
+            let width, height;
+            let waveOffset = 0;
+            let seagulls = [];
+            let shells = [];
             let animationId;
-            let mouseX = -1000;
-            let mouseY = -1000;
-            let isReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-            function resizeCanvas() {
-                canvas.width = window.innerWidth;
-                canvas.height = window.innerHeight;
+            function resize() {
+                width = canvas.width = window.innerWidth;
+                height = canvas.height = window.innerHeight;
+                initSeagulls();
+                initShells();
             }
 
-            function createStars() {
-                const count = Math.min(Math.floor((canvas.width * canvas.height) / 5500), 150);
-                stars = [];
+            function initSeagulls() {
+                seagulls = [];
+                const count = Math.floor(width / 180);
                 for (let i = 0; i < count; i++) {
-                    stars.push({
-                        x: Math.random() * canvas.width,
-                        y: Math.random() * canvas.height,
-                        radius: Math.random() * 1.6 + 0.4,
-                        baseAlpha: Math.random() * 0.7 + 0.2,
-                        alpha: Math.random() * 0.7 + 0.2,
-                        twinkleSpeed: Math.random() * 0.015 + 0.005,
-                        twinkleOffset: Math.random() * Math.PI * 2,
-                        driftX: (Math.random() - 0.5) * 0.15,
-                        driftY: (Math.random() - 0.5) * 0.15,
-                        hue: Math.random() < 0.15 ? 35 + Math.random() * 20 : 220 + Math.random() * 40,
-                        saturation: Math.random() < 0.15 ? '60%' : '30%',
+                    seagulls.push({
+                        x: Math.random() * width,
+                        y: 30 + Math.random() * (height * 0.25),
+                        size: 4 + Math.random() * 6,
+                        speed: 0.3 + Math.random() * 0.7,
+                        amplitude: 0.4 + Math.random() * 0.8,
+                        offset: Math.random() * Math.PI * 2,
                     });
                 }
             }
 
-            function drawStars(time) {
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
+            function initShells() {
+                shells = [];
+                const count = Math.floor(width / 60);
+                for (let i = 0; i < count; i++) {
+                    shells.push({
+                        x: Math.random() * width,
+                        y: height - 8 - Math.random() * 30,
+                        size: 2 + Math.random() * 5,
+                        type: Math.random() < 0.5 ? 'round' : 'spiral',
+                        rotation: Math.random() * Math.PI * 2,
+                    });
+                }
+            }
 
-                // 柔和星云光晕
-                const gradientCenter = ctx.createRadialGradient(
-                    canvas.width * 0.7, canvas.height * 0.3, 0,
-                    canvas.width * 0.7, canvas.height * 0.3, canvas.width * 0.45
-                );
-                gradientCenter.addColorStop(0, 'rgba(140,120,180,0.04)');
-                gradientCenter.addColorStop(0.5, 'rgba(100,80,140,0.02)');
-                gradientCenter.addColorStop(1, 'rgba(0,0,0,0)');
-                ctx.fillStyle = gradientCenter;
-                ctx.fillRect(0, 0, canvas.width, canvas.height);
+            function drawSky(time) {
+                const gradient = ctx.createLinearGradient(0, 0, 0, height * 0.65);
+                gradient.addColorStop(0, '#fad6a5');
+                gradient.addColorStop(0.3, '#f8c18a');
+                gradient.addColorStop(0.7, '#e4a67c');
+                gradient.addColorStop(1, '#c58b6b');
+                ctx.fillStyle = gradient;
+                ctx.fillRect(0, 0, width, height * 0.65);
+            }
 
-                const gradientLower = ctx.createRadialGradient(
-                    canvas.width * 0.25, canvas.height * 0.7, 0,
-                    canvas.width * 0.25, canvas.height * 0.7, canvas.width * 0.4
-                );
-                gradientLower.addColorStop(0, 'rgba(160,120,100,0.04)');
-                gradientLower.addColorStop(0.5, 'rgba(120,80,60,0.02)');
-                gradientLower.addColorStop(1, 'rgba(0,0,0,0)');
-                ctx.fillStyle = gradientLower;
-                ctx.fillRect(0, 0, canvas.width, canvas.height);
+            function drawSun() {
+                const sunX = width * 0.82;
+                const sunY = height * 0.28;
+                const gradient = ctx.createRadialGradient(sunX, sunY, 0, sunX, sunY, 70);
+                gradient.addColorStop(0, 'rgba(255,240,200,1)');
+                gradient.addColorStop(0.2, 'rgba(255,220,160,0.9)');
+                gradient.addColorStop(0.5, 'rgba(255,180,100,0.5)');
+                gradient.addColorStop(1, 'rgba(255,140,60,0)');
+                ctx.fillStyle = gradient;
+                ctx.beginPath();
+                ctx.arc(sunX, sunY, 70, 0, Math.PI * 2);
+                ctx.fill();
 
-                // 绘制星星
-                for (const star of stars) {
-                    if (!isReducedMotion) {
-                        star.alpha = star.baseAlpha + Math.sin(time * star.twinkleSpeed + star.twinkleOffset) * 0.25;
-                        star.alpha = Math.max(0.08, Math.min(0.95, star.alpha));
-                        star.x += star.driftX;
-                        star.y += star.driftY;
-                        if (star.x < -10) star.x = canvas.width + 10;
-                        if (star.x > canvas.width + 10) star.x = -10;
-                        if (star.y < -10) star.y = canvas.height + 10;
-                        if (star.y > canvas.height + 10) star.y = -10;
-                    }
+                ctx.fillStyle = 'rgba(255,245,220,0.7)';
+                ctx.beginPath();
+                ctx.arc(sunX, sunY, 38, 0, Math.PI * 2);
+                ctx.fill();
+            }
 
-                    const distToMouse = Math.hypot(star.x - mouseX, star.y - mouseY);
-                    const glowBoost = distToMouse < 120 ? (1 - distToMouse / 120) * 0.5 : 0;
+            function drawOcean(time) {
+                const horizonY = height * 0.6;
+                const oceanGrad = ctx.createLinearGradient(0, horizonY, 0, height);
+                oceanGrad.addColorStop(0, '#3a6b7c');
+                oceanGrad.addColorStop(0.3, '#255265');
+                oceanGrad.addColorStop(0.7, '#143b47');
+                oceanGrad.addColorStop(1, '#0a2a35');
+                ctx.fillStyle = oceanGrad;
+                ctx.fillRect(0, horizonY, width, height - horizonY);
 
+                // 波浪
+                ctx.save();
+                ctx.beginPath();
+                ctx.moveTo(0, horizonY);
+                for (let x = 0; x <= width; x += 5) {
+                    const y = horizonY + Math.sin(x * 0.02 + waveOffset) * 7 + Math.sin(x * 0.05 + time * 0.02) * 3;
+                    ctx.lineTo(x, y);
+                }
+                ctx.lineTo(width, horizonY - 30);
+                ctx.lineTo(0, horizonY - 30);
+                ctx.closePath();
+                const waveGrad = ctx.createLinearGradient(0, horizonY - 15, 0, horizonY + 15);
+                waveGrad.addColorStop(0, 'rgba(240,210,170,0.5)');
+                waveGrad.addColorStop(0.5, 'rgba(180,200,210,0.3)');
+                waveGrad.addColorStop(1, 'rgba(40,100,120,0.1)');
+                ctx.fillStyle = waveGrad;
+                ctx.fill();
+                ctx.restore();
+
+                // 海面反光
+                for (let i = 0; i < 30; i++) {
+                    const fx = (i * 97 + time * 2) % width;
+                    const fy = horizonY + 20 + Math.sin(i * 1.7 + time * 0.05) * 10;
+                    ctx.fillStyle = 'rgba(255,240,210,0.15)';
                     ctx.beginPath();
-                    ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
-                    const alpha = Math.min(1, star.alpha + glowBoost);
-                    ctx.fillStyle = `hsla(${star.hue}, ${star.saturation}, 85%, ${alpha})`;
+                    ctx.arc(fx, fy, 2 + Math.sin(time * 0.1 + i) * 1.5, 0, Math.PI * 2);
                     ctx.fill();
-
-                    // 亮星加光晕
-                    if (star.radius > 1.1 || glowBoost > 0.15) {
-                        const glow = ctx.createRadialGradient(star.x, star.y, star.radius * 0.3, star.x, star.y, star
-                            .radius * 4);
-                        const glowAlpha = alpha * 0.5;
-                        glow.addColorStop(0, `hsla(${star.hue}, ${star.saturation}, 90%, ${glowAlpha})`);
-                        glow.addColorStop(1, 'rgba(0,0,0,0)');
-                        ctx.beginPath();
-                        ctx.arc(star.x, star.y, star.radius * 4, 0, Math.PI * 2);
-                        ctx.fillStyle = glow;
-                        ctx.fill();
-                    }
                 }
-
-                // 偶尔流星
-                if (!isReducedMotion && Math.random() < 0.003) {
-                    spawnShootingStar();
-                }
-                drawShootingStars(time);
             }
 
-            // 流星
-            let shootingStars = [];
+            function drawBeach() {
+                const beachStartY = height * 0.78;
+                const beachGrad = ctx.createLinearGradient(0, beachStartY, 0, height);
+                beachGrad.addColorStop(0, '#dbb88c');
+                beachGrad.addColorStop(0.3, '#c9a278');
+                beachGrad.addColorStop(0.7, '#b58b63');
+                beachGrad.addColorStop(1, '#9e7350');
+                ctx.fillStyle = beachGrad;
+                ctx.fillRect(0, beachStartY, width, height - beachStartY);
 
-            function spawnShootingStar() {
-                shootingStars.push({
-                    x: Math.random() * canvas.width * 0.8,
-                    y: Math.random() * canvas.height * 0.4,
-                    length: 60 + Math.random() * 100,
-                    speed: 6 + Math.random() * 10,
-                    angle: Math.PI / 4 + (Math.random() - 0.5) * 0.4,
-                    life: 1,
-                    decay: 0.015 + Math.random() * 0.03,
-                });
-                if (shootingStars.length > 3) shootingStars.shift();
-            }
-
-            function drawShootingStars(time) {
-                for (let i = shootingStars.length - 1; i >= 0; i--) {
-                    const s = shootingStars[i];
-                    s.life -= s.decay;
-                    if (s.life <= 0) {
-                        shootingStars.splice(i, 1);
-                        continue;
-                    }
-                    const endX = s.x - Math.cos(s.angle) * s.length;
-                    const endY = s.y - Math.sin(s.angle) * s.length;
-                    const grad = ctx.createLinearGradient(s.x, s.y, endX, endY);
-                    grad.addColorStop(0, `rgba(255,240,220,${s.life * 0.9})`);
-                    grad.addColorStop(1, 'rgba(255,240,220,0)');
+                // 沙滩纹理
+                ctx.fillStyle = 'rgba(255,235,210,0.15)';
+                for (let i = 0; i < width; i += 12) {
+                    const y = beachStartY + 5 + Math.sin(i * 0.3) * 4;
                     ctx.beginPath();
-                    ctx.moveTo(s.x, s.y);
-                    ctx.lineTo(endX, endY);
-                    ctx.strokeStyle = grad;
-                    ctx.lineWidth = 1.2;
+                    ctx.arc(i, y, 1.5, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+            }
+
+            function drawSeagulls(time) {
+                for (const gull of seagulls) {
+                    gull.x += gull.speed * 0.3;
+                    if (gull.x > width + 20) gull.x = -20;
+                    const y = gull.y + Math.sin(time * 0.03 + gull.offset) * gull.amplitude * 8;
+                    ctx.strokeStyle = 'rgba(255,255,255,0.7)';
+                    ctx.lineWidth = 1;
+                    ctx.beginPath();
+                    ctx.moveTo(gull.x - gull.size, y);
+                    ctx.quadraticCurveTo(gull.x - gull.size * 0.6, y - gull.size * 0.6, gull.x, y);
+                    ctx.quadraticCurveTo(gull.x + gull.size * 0.6, y - gull.size * 0.6, gull.x + gull.size, y);
                     ctx.stroke();
-                    s.x -= Math.cos(s.angle) * s.speed;
-                    s.y -= Math.sin(s.angle) * s.speed;
+                }
+            }
+
+            function drawShells() {
+                for (const shell of shells) {
+                    ctx.save();
+                    ctx.translate(shell.x, shell.y);
+                    ctx.rotate(shell.rotation);
+                    ctx.fillStyle = 'rgba(245,235,215,0.7)';
+                    ctx.beginPath();
+                    if (shell.type === 'round') {
+                        ctx.arc(0, 0, shell.size, 0, Math.PI * 2);
+                    } else {
+                        ctx.ellipse(0, 0, shell.size * 0.8, shell.size * 1.2, 0, 0, Math.PI * 2);
+                    }
+                    ctx.fill();
+                    ctx.fillStyle = 'rgba(210,180,140,0.5)';
+                    ctx.beginPath();
+                    ctx.arc(0, 0, shell.size * 0.5, 0, Math.PI * 2);
+                    ctx.fill();
+                    ctx.restore();
                 }
             }
 
             function animate(time) {
-                drawStars(time);
-                animationId = requestAnimationFrame(animate);
-            }
-
-            // 鼠标/触摸追踪（用于星星靠近时变亮）
-            function onPointerMove(e) {
-                mouseX = e.clientX;
-                mouseY = e.clientY;
-            }
-
-            function onTouchMove(e) {
-                if (e.touches.length > 0) {
-                    mouseX = e.touches[0].clientX;
-                    mouseY = e.touches[0].clientY;
-                }
-            }
-
-            function initStars() {
-                resizeCanvas();
-                createStars();
-                cancelAnimationFrame(animationId);
+                waveOffset += 0.015;
+                ctx.clearRect(0, 0, width, height);
+                drawSky(time);
+                drawSun();
+                drawOcean(time);
+                drawBeach();
+                drawSeagulls(time);
+                drawShells();
                 animationId = requestAnimationFrame(animate);
             }
 
             window.addEventListener('resize', () => {
-                resizeCanvas();
-                createStars();
-            });
-            window.addEventListener('pointermove', onPointerMove, { passive: true });
-            window.addEventListener('touchmove', onTouchMove, { passive: true });
-            window.addEventListener('orientationchange', () => {
-                setTimeout(() => {
-                    resizeCanvas();
-                    createStars();
-                }, 400);
+                resize();
             });
 
-            // 页面不可见时暂停动画以节省资源
+            window.addEventListener('orientationchange', () => {
+                setTimeout(resize, 400);
+            });
+
             document.addEventListener('visibilitychange', () => {
                 if (document.hidden) {
                     cancelAnimationFrame(animationId);
@@ -887,16 +834,11 @@
                 }
             });
 
-            initStars();
+            resize();
+            animationId = requestAnimationFrame(animate);
 
-            // ============ 滚动触发动画 (Intersection Observer) ============
+            // ============ 滚动触发动画 ============
             const animatedSections = document.querySelectorAll('.section[data-animate]');
-            const observerOptions = {
-                root: null,
-                rootMargin: '0px 0px -40px 0px',
-                threshold: 0.15,
-            };
-
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
@@ -904,101 +846,48 @@
                         observer.unobserve(entry.target);
                     }
                 });
-            }, observerOptions);
+            }, { rootMargin: '0px 0px -40px 0px', threshold: 0.15 });
 
-            animatedSections.forEach(section => {
-                observer.observe(section);
-            });
+            animatedSections.forEach(section => observer.observe(section));
 
-            // ============ 信封打开交互 ============
+            // ============ 信封打开 ============
             const envelope = document.getElementById('envelope');
-            const letterContent = document.getElementById('letterContent');
             let isOpened = false;
 
             function openEnvelope(e) {
                 if (isOpened) return;
                 e.preventDefault();
-                e.stopPropagation();
                 isOpened = true;
                 envelope.classList.add('opened');
-
-                // 打开后自动滚动到信件内容顶部
                 setTimeout(() => {
+                    const letterContent = document.getElementById('letterContent');
                     const rect = letterContent.getBoundingClientRect();
-                    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-                    const targetY = scrollTop + rect.top - 80;
+                    const scrollY = window.pageYOffset || document.documentElement.scrollTop;
                     window.scrollTo({
-                        top: targetY,
+                        top: scrollY + rect.top - 70,
                         behavior: 'smooth',
                     });
                 }, 400);
             }
 
             envelope.addEventListener('click', openEnvelope);
-            envelope.addEventListener('touchend', function(e) {
-                // 防止双击缩放等问题
-                if (!isOpened) {
-                    openEnvelope(e);
-                }
+            envelope.addEventListener('touchend', (e) => {
+                if (!isOpened) openEnvelope(e);
             });
 
-            // ============ 点击页面任意位置飘出小光点 ============
-            function createSparkle(x, y) {
-                const sparkle = document.createElement('div');
-                sparkle.style.cssText = `
-                    position: fixed;
-                    left: ${x}px;
-                    top: ${y}px;
-                    width: 6px;
-                    height: 6px;
-                    border-radius: 50%;
-                    background: rgba(220,190,150,0.9);
-                    pointer-events: none;
-                    z-index: 999;
-                    animation: sparkleFade 1.2s ease-out forwards;
-                `;
-                document.body.appendChild(sparkle);
-                setTimeout(() => sparkle.remove(), 1300);
-            }
-
-            // 注入飘散动画的 keyframes
-            const sparkleStyle = document.createElement('style');
-            sparkleStyle.textContent = `
-                @keyframes sparkleFade {
-                    0% { transform: translate(0,0) scale(1); opacity: 0.9; }
-                    50% { transform: translate(${(Math.random()-0.5)*40}px, -40px) scale(1.8); opacity: 0.6; }
-                    100% { transform: translate(${(Math.random()-0.5)*60}px, -90px) scale(0); opacity: 0; }
-                }
-            `;
-            document.head.appendChild(sparkleStyle);
-
-            document.addEventListener('click', function(e) {
-                // 不在信封区域时触发（避免冲突）
-                if (!envelope.contains(e.target)) {
-                    createSparkle(e.clientX, e.clientY);
-                }
-            });
-
-            // ============ 初始滚动提示（几秒后自动渐隐） ============
-            const scrollHint = document.querySelector('.hero-scroll-hint');
-            if (scrollHint && !isReducedMotion) {
-                setTimeout(() => {
-                    scrollHint.style.transition = 'opacity 2s ease';
-                    scrollHint.style.opacity = '0';
-                }, 8000);
-                // 用户开始滚动后就彻底隐藏
+            // 滚动提示自动隐藏
+            const hint = document.querySelector('.hero-scroll-hint');
+            if (hint) {
                 let hintHidden = false;
-                window.addEventListener('scroll', function hideHint() {
+                window.addEventListener('scroll', function hide() {
                     if (!hintHidden && window.scrollY > 30) {
                         hintHidden = true;
-                        scrollHint.style.transition = 'opacity 0.6s ease';
-                        scrollHint.style.opacity = '0';
-                        window.removeEventListener('scroll', hideHint);
+                        hint.style.transition = 'opacity 0.6s ease';
+                        hint.style.opacity = '0';
+                        window.removeEventListener('scroll', hide);
                     }
                 }, { passive: true });
             }
-
-            console.log('✨ 页面已就绪 — 用心去做，剩下的交给时间。');
         })();
     </script>
 </body>
