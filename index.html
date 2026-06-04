@@ -1,5 +1,3 @@
-
-```html
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -169,6 +167,7 @@
             display: flex;
             flex-direction: column;
             gap: 10px;
+            margin-top: -6px; /* 细微向上移动，补偿去掉标签后的空白 */
         }
         .reflection-card {
             background: var(--bg-card);
@@ -352,10 +351,9 @@
             <p class="hero-subtitle">有些话，我想认真说给你听。<br>下面这封信，是我全部的真心。</p>
         </section>
 
-        <!-- 反思卡片（紧凑版，无大标题） -->
+        <!-- 反思卡片（紧凑版，无标签） -->
         <section class="section" data-animate>
-            <div class="section-label">✦ 我听到了</div>
-            <!-- 删除了原来的 h2 标题 -->
+            <!-- 已删除 “✦ 我听到了” 标签 -->
             <div class="reflection-cards">
                 <div class="reflection-card">
                     <span class="card-icon">🕯️</span>
@@ -788,4 +786,3 @@
     </script>
 </body>
 </html>
-```
